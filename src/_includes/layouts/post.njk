@@ -3,6 +3,15 @@ layout: layouts/base.njk
 ---
 <article class="post">
   <header class="post-header">
+    {% if game %}
+      {% set gameData = game | getGame(games) %}
+      {% if gameData %}
+      <div class="game-info">
+        <img src="{{ gameData.cover }}" alt="{{ gameData.title }}" class="game-cover">
+        <span class="game-title">{{ gameData.title }}</span>
+      </div>
+      {% endif %}
+    {% endif %}
     <h1>{{ title }}</h1>
     {% if date %}
     <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>

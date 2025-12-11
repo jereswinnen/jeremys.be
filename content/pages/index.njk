@@ -11,7 +11,7 @@ permalink: /
 <section class="recent-posts">
   <h2>Recent Posts</h2>
   <ul>
-    {% for post in collections.posts | reverse %}
+    {% for post in collections.blog %}
     {% if loop.index <= 5 %}
     <li>
       <a href="{{ post.url }}">{{ post.data.title }}</a>

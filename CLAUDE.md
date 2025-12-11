@@ -17,11 +17,18 @@ Eleventy 3.x static site with Nunjucks templating.
 
 ### Content
 
-- `content/pages/` — Site pages (index, about, feed, sitemap)
-- `content/posts/` — Blog posts (markdown), auto-tagged via `posts.json`
-- `content/work/` — Work/project pages (markdown), auto-tagged via `work.json`
+- `content/pages/` — Site pages (index, about, blog, feed, sitemap)
+- `content/articles/` — Long-form writing
+- `content/notes/` — Short-form posts
+- `content/gaming/` — Gaming logs (reference games via `game: slug` frontmatter)
+- `content/work/` — Work/project pages
 
-Directory data files set default layouts, tags, and permalinks. Override in frontmatter: `layout: layouts/case-study.njk`
+Directory data files set default layouts, tags, and permalinks. Override in frontmatter.
+
+### Collections
+
+- `collections.blog` — All post types combined (articles + notes + gaming)
+- `collections.articles`, `collections.notes`, `collections.gaming`, `collections.work`
 
 ### Converting content/ to git submodule
 
@@ -40,6 +47,7 @@ git submodule add <url> content
 
 - `src/_data/site.json` — Site metadata (accessible as `site.*` in templates)
 - `src/_data/nav.json` — Navigation items (iterable as `nav`)
+- `src/_data/games.json` — Game entities with slug, title, cover, platform
 
 ### Styling
 

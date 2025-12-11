@@ -92,17 +92,34 @@ export default function(eleventyConfig) {
 </aside>`;
   });
 
+  // Filter to look up game by slug
+  eleventyConfig.addFilter("getGame", (slug, games) => {
+    return games.find(game => game.slug === slug);
+  });
+
   // Collections
-  eleventyConfig.addCollection("posts", function(collectionApi) {
-    return collectionApi.getFilteredByTag("posts").sort((a, b) => {
-      return b.date - a.date;
-    });
+  eleventyConfig.addCollection("articles", function(collectionApi) {
+    return collectionApi.getFilteredByTag("articles").sort((a, b) => b.date - a.date);
+  });
+
+  eleventyConfig.addCollection("notes", function(collectionApi) {
+    return collectionApi.getFilteredByTag("notes").sort((a, b) => b.date - a.date);
+  });
+
+  eleventyConfig.addCollection("gaming", function(collectionApi) {
+    return collectionApi.getFilteredByTag("gaming").sort((a, b) => b.date - a.date);
+  });
+
+  eleventyConfig.addCollection("blog", function(collectionApi) {
+    return [
+      ...collectionApi.getFilteredByTag("articles"),
+      ...collectionApi.getFilteredByTag("notes"),
+      ...collectionApi.getFilteredByTag("gaming")
+    ].sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("work", function(collectionApi) {
-    return collectionApi.getFilteredByTag("work").sort((a, b) => {
-      return b.date - a.date;
-    });
+    return collectionApi.getFilteredByTag("work").sort((a, b) => b.date - a.date);
   });
 
   // Set Nunjucks as the template engine for markdown files
