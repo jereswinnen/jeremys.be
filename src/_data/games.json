@@ -1,8 +1,8 @@
 [
   {
-    "slug": "example-game",
-    "title": "Example Game",
-    "cover": "/assets/images/games/example-game.jpg",
-    "platform": "PC"
+    "slug": "kirby-air-riders",
+    "title": "Kirby Air Riders",
+    "cover": "kirby-air-riders.jpg",
+    "platform": "Nintendo Switch 2"
   }
 ]

@@ -7,7 +7,7 @@ layout: layouts/base.njk
       {% set gameData = game | getGame(games) %}
       {% if gameData %}
       <div class="game-info">
-        <img src="{{ gameData.cover }}" alt="{{ gameData.title }}" class="game-cover">
+        {% gameCover game, games %}
         <span class="game-title">{{ gameData.title }}</span>
       </div>
       {% endif %}

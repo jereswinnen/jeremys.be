@@ -1,7 +1,7 @@
 ---
 title: Example Gaming Log
 date: 2024-12-09
-game: example-game
+game: kirby-air-riders
 ---
 
-Just started playing Example Game. First impressions are great!
+Just started playing Kirby. First impressions are great!
