@@ -1,5 +1,5 @@
 <footer class="site-footer">
-  <p>&copy; {% if page.date %}{{ page.date | date('%Y') }}{% else %}{{ "now" | date('%Y') }}{% endif %} {{ site.author }}</p>
+  <p>&copy; {% if page.date %}{{ page.date | date('yyyy') }}{% else %}{{ "now" | date('yyyy') }}{% endif %} {{ site.author }}</p>
   {% if site.social %}
   <ul class="social-links">
     {% if site.social.github %}<li><a href="https://github.com/{{ site.social.github }}">GitHub</a></li>{% endif %}
