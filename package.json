@@ -7,11 +7,11 @@
     "dev": "concurrently \"pnpm:dev:*\"",
     "dev:eleventy": "eleventy --serve --watch",
     "dev:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/tailwind.css --watch",
-    "dev:sass": "sass --watch src/assets/css/styles.scss:_site/assets/css/styles.css",
+    "dev:sass": "sass --watch src/assets/css/global.scss:_site/assets/css/global.css",
     "build": "pnpm build:tailwind && pnpm build:sass && pnpm build:eleventy",
     "build:eleventy": "eleventy",
     "build:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/tailwind.css --minify",
-    "build:sass": "sass src/assets/css/styles.scss:_site/assets/css/styles.css --style=compressed"
+    "build:sass": "sass src/assets/css/global.scss:_site/assets/css/global.css --style=compressed"
   },
   "keywords": [],
   "author": "",

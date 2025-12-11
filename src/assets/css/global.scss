@@ -3,6 +3,7 @@
 :root {
     // Track widths
     --grid-gutter: 1rem;
+    --grid-gutter-row: 2rem;
     --grid-content: 40rem;
     --grid-popout: 2rem;
     --grid-page-max: 62.5rem;
@@ -14,9 +15,9 @@
     }
 }
 
-// Main page grid - apply to <body> or wrapper
 .o-grid {
     display: grid;
+    row-gap: var(--grid-gutter-row);
     grid-template-columns:
         [full-start]
             minmax(var(--grid-gutter), 1fr)
@@ -60,12 +61,12 @@
 .o-grid > main {
     display: grid;
     grid-template-columns: subgrid;
-    grid-column: full;
+    //grid-column: full;
 
-    > * {
+    /* > * {
         grid-column: content;
         background: plum;
-    }
+    } */
 
     > .o-grid__popout {
         grid-column: popout;

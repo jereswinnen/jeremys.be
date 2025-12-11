@@ -6,7 +6,7 @@
     <title>{% if title %}{{ title }} -{% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ description or site.description }}" />
     <link rel="stylesheet" href="/assets/css/tailwind.css" />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/global.css" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -17,7 +17,7 @@
   <body class="o-grid">
     {% include "partials/header.njk" %}
 
-    <main>{{ content | safe }}</main>
+    <main class="o-grid__page">{{ content | safe }}</main>
 
     {% include "partials/footer.njk" %}
   </body>

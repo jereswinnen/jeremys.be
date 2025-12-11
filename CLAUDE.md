@@ -57,7 +57,7 @@ git submodule add <url> content
 
 Two CSS pipelines output to `_site/assets/css/`:
 - Tailwind v4: `src/assets/css/tailwind.css`
-- Sass: `src/assets/css/styles.scss`
+- Sass: `src/assets/css/global.scss`
 
 ### Available Shortcodes
 

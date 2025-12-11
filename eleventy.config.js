@@ -10,6 +10,11 @@ export default function(eleventyConfig) {
   // Passthrough copy
   eleventyConfig.addPassthroughCopy({"src/assets/images": "assets/images"});
 
+  // Dev server: reload on CSS changes from Tailwind/Sass
+  eleventyConfig.setServerOptions({
+    watch: ["./_site/assets/css/**/*.css"]
+  });
+
   // Ignore non-content directories
   eleventyConfig.ignores.add("node_modules/**");
   eleventyConfig.ignores.add("_site/**");
