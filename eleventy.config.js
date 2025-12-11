@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
 import pluginRss from "@11ty/eleventy-plugin-rss";
-import Image from "@11ty/eleventy-img";
-import path from "path";
+import shortcodes from "./src/_config/shortcodes/index.js";
 
 export default function(eleventyConfig) {
   // Plugins
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(shortcodes);
 
   // Passthrough copy
   eleventyConfig.addPassthroughCopy({"src/assets/images": "assets/images"});
@@ -34,91 +34,6 @@ export default function(eleventyConfig) {
       dateObj = new Date();
     }
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
-  });
-
-  // Image shortcode
-  eleventyConfig.addAsyncShortcode("image", async function(src, alt, className = "", sizes = "100vw") {
-    if (!alt) {
-      throw new Error(`Missing alt attribute for image: ${src}`);
-    }
-
-    const inputPath = src.startsWith("/")
-      ? path.join("src/assets/images", src.replace(/^\//, ""))
-      : path.join(path.dirname(this.page.inputPath), src);
-
-    const metadata = await Image(inputPath, {
-      widths: [400, 800, 1200],
-      formats: ["webp", "auto"],
-      outputDir: "./_site/assets/images/",
-      urlPath: "/assets/images/",
-      filenameFormat: function(id, src, width, format) {
-        const extension = path.extname(src);
-        const name = path.basename(src, extension);
-        return `${name}-${width}w.${format}`;
-      }
-    });
-
-    const imageAttributes = {
-      alt,
-      sizes,
-      loading: "lazy",
-      decoding: "async",
-    };
-
-    if (className) {
-      imageAttributes.class = className;
-    }
-
-    return Image.generateHTML(metadata, imageAttributes);
-  });
-
-  // Game cover shortcode
-  eleventyConfig.addAsyncShortcode("gameCover", async function(gameSlug, games) {
-    const game = games.find(g => g.slug === gameSlug);
-    if (!game || !game.cover) return "";
-
-    const inputPath = path.join("src/assets/images/games", game.cover);
-
-    const metadata = await Image(inputPath, {
-      widths: [200, 400],
-      formats: ["webp", "auto"],
-      outputDir: "./_site/assets/images/games/",
-      urlPath: "/assets/images/games/",
-      filenameFormat: function(id, src, width, format) {
-        const extension = path.extname(src);
-        const name = path.basename(src, extension);
-        return `${name}-${width}w.${format}`;
-      }
-    });
-
-    return Image.generateHTML(metadata, {
-      alt: game.title,
-      class: "game-cover",
-      loading: "lazy",
-      decoding: "async",
-      sizes: "200px"
-    });
-  });
-
-  // YouTube shortcode
-  eleventyConfig.addShortcode("youtube", function(videoId) {
-    return `<div class="video-embed">
-  <iframe
-    src="https://www.youtube.com/embed/${videoId}"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-    loading="lazy">
-  </iframe>
-</div>`;
-  });
-
-  // Callout paired shortcode
-  eleventyConfig.addPairedShortcode("callout", function(content, type = "info") {
-    return `<aside class="callout callout-${type}">
-  ${content}
-</aside>`;
   });
 
   // Filter to look up game by slug
