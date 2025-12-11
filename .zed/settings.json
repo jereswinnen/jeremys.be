@@ -1,0 +1,18 @@
+{
+  "file_types": {
+    "Jinja2": ["njk"]
+  },
+  "prettier": {
+    "allowed": false
+  },
+  "languages": {
+    "Jinja2": {
+      "formatter": {
+        "external": {
+          "command": "/Users/jeremy/.nvm/versions/node/v22.21.1/bin/npx",
+          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    }
+  }
+}
