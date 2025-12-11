@@ -15,9 +15,13 @@ Eleventy 3.x static site with Nunjucks templating.
 
 **Source:** `src/` + `content/` → **Output:** `_site/`
 
+### Template Pages
+
+- `src/pages/` — Template pages with Nunjucks logic (index, blog, feed, sitemap)
+
 ### Content
 
-- `content/pages/` — Site pages (index, about, blog, feed, sitemap)
+- `content/pages/` — Static content pages (about)
 - `content/articles/` — Long-form writing
 - `content/notes/` — Short-form posts
 - `content/gaming/` — Gaming logs (reference games via `game: slug` frontmatter)
