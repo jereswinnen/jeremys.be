@@ -1,7 +1,84 @@
-// Main stylesheet
-// Add your custom Sass styles here
-
-// Import Tailwind
 @import "tailwind.css";
 
-// Custom styles below
+:root {
+    // Track widths
+    --grid-gutter: 1rem;
+    --grid-content: 40rem;
+    --grid-popout: 2rem;
+    --grid-page-max: 62.5rem;
+    --grid-page: calc((var(--grid-page-max) - var(--grid-content) - var(--grid-popout) * 2) / 2);
+
+    @media (width >= 48rem) {
+        --grid-gutter: 2rem;
+        --grid-popout: 4rem;
+    }
+}
+
+// Main page grid - apply to <body> or wrapper
+.o-grid {
+    display: grid;
+    grid-template-columns:
+        [full-start]
+            minmax(var(--grid-gutter), 1fr)
+        [page-start]
+            minmax(0, var(--grid-page))
+        [popout-start]
+            minmax(0, var(--grid-popout))
+        [content-start]
+            min(var(--grid-content), 100% - var(--grid-gutter) * 2)
+        [content-end]
+            minmax(0, var(--grid-popout))
+        [popout-end]
+            minmax(0, var(--grid-page))
+        [page-end]
+            minmax(var(--grid-gutter), 1fr)
+        [full-end];
+}
+
+// All direct children default to content width
+.o-grid > * {
+    grid-column: content;
+}
+
+// Breakout utilities
+.o-grid__popout {
+    grid-column: popout;
+    background: mediumseagreen;
+}
+
+.o-grid__page {
+    grid-column: page;
+    background: lightcoral;
+}
+
+.o-grid__full {
+    grid-column: full;
+    background: palevioletred;
+}
+
+// Main inherits the grid via subgrid to allow children to also use breakout classes
+.o-grid > main {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: full;
+
+    > * {
+        grid-column: content;
+        background: plum;
+    }
+
+    > .o-grid__popout {
+        grid-column: popout;
+        background: mediumseagreen;
+    }
+
+    > .o-grid__page {
+        grid-column: page;
+        background: lightcoral;
+    }
+
+    > .o-grid__full {
+        grid-column: full;
+        background: palevioletred;
+    }
+}
