@@ -8,7 +8,16 @@ export default function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
   // Passthrough copy
-  eleventyConfig.addPassthroughCopy("src/assets/images");
+  eleventyConfig.addPassthroughCopy({"src/assets/images": "assets/images"});
+
+  // Ignore non-content directories
+  eleventyConfig.ignores.add("node_modules/**");
+  eleventyConfig.ignores.add("_site/**");
+  eleventyConfig.ignores.add("*.config.js");
+  eleventyConfig.ignores.add("*.config.mjs");
+  eleventyConfig.ignores.add("package*.json");
+  eleventyConfig.ignores.add("README.md");
+  eleventyConfig.ignores.add("CLAUDE.md");
 
   // Date filters
   eleventyConfig.addFilter("readableDate", (dateObj) => {
@@ -33,7 +42,7 @@ export default function(eleventyConfig) {
     }
 
     const inputPath = src.startsWith("/")
-      ? path.join("src", src)
+      ? path.join("src/assets/images", src.replace(/^\//, ""))
       : path.join(path.dirname(this.page.inputPath), src);
 
     const metadata = await Image(inputPath, {
@@ -90,8 +99,8 @@ export default function(eleventyConfig) {
     });
   });
 
-  eleventyConfig.addCollection("projects", function(collectionApi) {
-    return collectionApi.getFilteredByTag("projects").sort((a, b) => {
+  eleventyConfig.addCollection("work", function(collectionApi) {
+    return collectionApi.getFilteredByTag("work").sort((a, b) => {
       return b.date - a.date;
     });
   });
@@ -103,10 +112,10 @@ export default function(eleventyConfig) {
 
   return {
     dir: {
-      input: "src",
+      input: ".",
       output: "_site",
-      includes: "_includes",
-      data: "_data"
+      includes: "src/_includes",
+      data: "src/_data"
     },
     templateFormats: ["njk", "md", "html"],
     markdownTemplateEngine: "njk",

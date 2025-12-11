@@ -13,14 +13,23 @@ pnpm build        # Production build
 
 Eleventy 3.x static site with Nunjucks templating.
 
-**Source:** `src/` → **Output:** `_site/`
+**Source:** `src/` + `content/` → **Output:** `_site/`
 
-### Content Collections
+### Content
 
-- `src/posts/` — Blog posts (markdown), auto-tagged via `posts.json`
-- `src/projects/` — Project pages (markdown), auto-tagged via `projects.json`
+- `content/pages/` — Site pages (index, about, feed, sitemap)
+- `content/posts/` — Blog posts (markdown), auto-tagged via `posts.json`
+- `content/work/` — Work/project pages (markdown), auto-tagged via `work.json`
 
-Directory data files (`posts.json`, `projects.json`) set default layouts and tags for all files in that folder. Override layout in frontmatter: `layout: layouts/case-study.njk`
+Directory data files set default layouts, tags, and permalinks. Override in frontmatter: `layout: layouts/case-study.njk`
+
+### Converting content/ to git submodule
+
+```bash
+cd content && git init && git remote add origin <url> && git add . && git commit -m "init" && git push -u origin main
+cd .. && rm -rf content && git add content && git commit -m "Remove content folder"
+git submodule add <url> content
+```
 
 ### Layouts & Partials
 
