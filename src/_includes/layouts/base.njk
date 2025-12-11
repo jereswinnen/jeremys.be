@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or site.title }}{% if title and site.title %} | {{ site.title }}{% endif %}</title>
+  <title>{% if title %}{{ title }} - {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ description or site.description }}">
   <link rel="stylesheet" href="/assets/css/tailwind.css">
   <link rel="stylesheet" href="/assets/css/styles.css">

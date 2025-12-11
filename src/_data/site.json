@@ -1,12 +1,12 @@
 {
-  "name": "",
-  "title": "",
-  "author": "",
-  "description": "",
-  "url": "",
+  "name": "Jeremy Swinnen",
+  "title": "Jeremy Swinnen",
+  "author": "Jeremy Swinnen",
+  "description": "Digital designer who builds stuff",
+  "url": "https://jeremys.be",
   "social": {
-    "github": "",
-    "linkedin": "",
-    "twitter": ""
+    "github": "https://github.com/jereswinnen",
+    "mastodon": "https://mstdn.social/@jeremys",
+    "email": "hey@jeremys.be"
   }
 }
