@@ -1,0 +1,6 @@
+[
+  { "label": "Home", "url": "/" },
+  { "label": "Posts", "url": "/posts/" },
+  { "label": "Projects", "url": "/projects/" },
+  { "label": "About", "url": "/about/" }
+]

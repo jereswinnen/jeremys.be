@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+<article class="post">
+  <header class="post-header">
+    <h1>{{ title }}</h1>
+    {% if date %}
+    <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+</article>

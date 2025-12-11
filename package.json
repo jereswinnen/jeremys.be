@@ -1,0 +1,36 @@
+{
+  "name": "jeremys.be",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"pnpm:dev:*\"",
+    "dev:eleventy": "eleventy --serve --watch",
+    "dev:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/tailwind.css --watch",
+    "dev:sass": "sass --watch src/assets/css/styles.scss:_site/assets/css/styles.css",
+    "build": "pnpm build:tailwind && pnpm build:sass && pnpm build:eleventy",
+    "build:eleventy": "eleventy",
+    "build:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/tailwind.css --minify",
+    "build:sass": "sass src/assets/css/styles.scss:_site/assets/css/styles.css --style=compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "@tailwindcss/cli": "^4.1.17",
+    "concurrently": "^9.2.1",
+    "luxon": "^3.7.2",
+    "sass": "^1.96.0",
+    "tailwindcss": "^4.1.17"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "@parcel/watcher"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+# Build output
+_site/
+
+# Dependencies
+node_modules/
+
+# Eleventy cache (eleventy-img)
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Environment files
+.env
+.env.local

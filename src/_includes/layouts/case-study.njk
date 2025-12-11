@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+<article class="case-study">
+  <header class="case-study-header">
+    <h1>{{ title }}</h1>
+    {% if date %}
+    <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+    {% endif %}
+  </header>
+
+  <div class="case-study-content">
+    {{ content | safe }}
+  </div>
+</article>
