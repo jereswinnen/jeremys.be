@@ -2,13 +2,14 @@ import { DateTime } from "luxon";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import shortcodes from "./src/_config/shortcodes/index.js";
 
-export default function(eleventyConfig) {
+export default function (eleventyConfig) {
   // Plugins
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(shortcodes);
 
   // Passthrough copy
-  eleventyConfig.addPassthroughCopy({"src/assets/images": "assets/images"});
+  eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
 
   // Dev server: reload on CSS changes from Tailwind/Sass
   eleventyConfig.setServerOptions({
@@ -47,19 +48,19 @@ export default function(eleventyConfig) {
   });
 
   // Collections
-  eleventyConfig.addCollection("articles", function(collectionApi) {
+  eleventyConfig.addCollection("articles", function (collectionApi) {
     return collectionApi.getFilteredByTag("articles").sort((a, b) => b.date - a.date);
   });
 
-  eleventyConfig.addCollection("notes", function(collectionApi) {
+  eleventyConfig.addCollection("notes", function (collectionApi) {
     return collectionApi.getFilteredByTag("notes").sort((a, b) => b.date - a.date);
   });
 
-  eleventyConfig.addCollection("gaming", function(collectionApi) {
+  eleventyConfig.addCollection("gaming", function (collectionApi) {
     return collectionApi.getFilteredByTag("gaming").sort((a, b) => b.date - a.date);
   });
 
-  eleventyConfig.addCollection("blog", function(collectionApi) {
+  eleventyConfig.addCollection("blog", function (collectionApi) {
     return [
       ...collectionApi.getFilteredByTag("articles"),
       ...collectionApi.getFilteredByTag("notes"),
@@ -67,7 +68,7 @@ export default function(eleventyConfig) {
     ].sort((a, b) => b.date - a.date);
   });
 
-  eleventyConfig.addCollection("work", function(collectionApi) {
+  eleventyConfig.addCollection("work", function (collectionApi) {
     return collectionApi.getFilteredByTag("work").sort((a, b) => b.date - a.date);
   });
 

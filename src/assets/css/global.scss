@@ -1,7 +1,14 @@
 @import "tailwind.css";
 
+@font-face {
+    font-family: 'Bricolage Grotesque';
+    src: url('/assets/fonts/BricolageGrotesque.woff2') format('woff2-variations');
+    src: url('/assets/fonts/BricolageGrotesque.woff2') format('woff2') tech('variations');
+    font-weight: 200 800;
+    font-stretch: 75% 100%;
+}
+
 :root {
-    // Track widths
     --grid-gutter: 1rem;
     --grid-gutter-row: 2rem;
     --grid-content: 40rem;
@@ -9,10 +16,17 @@
     --grid-page-max: 62.5rem;
     --grid-page: calc((var(--grid-page-max) - var(--grid-content) - var(--grid-popout) * 2) / 2);
 
+    --font-sans: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+    --font-stretch-condensed: 87.5%;
+
     @media (width >= 48rem) {
         --grid-gutter: 2rem;
         --grid-popout: 4rem;
     }
+}
+
+body {
+  font-family: var(--font-sans);
 }
 
 .o-grid {
@@ -44,17 +58,14 @@
 // Breakout utilities
 .o-grid__popout {
     grid-column: popout;
-    background: mediumseagreen;
 }
 
 .o-grid__page {
     grid-column: page;
-    background: lightcoral;
 }
 
 .o-grid__full {
     grid-column: full;
-    background: palevioletred;
 }
 
 // Main inherits the grid via subgrid to allow children to also use breakout classes
@@ -70,16 +81,13 @@
 
     > .o-grid__popout {
         grid-column: popout;
-        background: mediumseagreen;
     }
 
     > .o-grid__page {
         grid-column: page;
-        background: lightcoral;
     }
 
     > .o-grid__full {
         grid-column: full;
-        background: palevioletred;
     }
 }
