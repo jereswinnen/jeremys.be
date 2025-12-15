@@ -20,6 +20,7 @@
     --u-space-lg: 1.25rem;
 
     --u-multiplier-xs: 0.025vw;
+    --u-multiplier-sm: 0.3vw;
     --u-multiplier-md: 0.75vw;
     --u-multiplier-lg: 2vw;
 
@@ -30,8 +31,8 @@
     --font-leading-headings: 1.2;
     --font-leading-body: 1.5;
     --font-size-h1: calc(2.6rem + var(--u-multiplier-md));
-    --font-size-h2: calc(1.25rem +  var(--u-multiplier-xs));
-    --font-size-prose: calc(1.25rem +  var(--u-multiplier-xs));
+    --font-size-h2: calc(1.25rem + var(--u-multiplier-sm));
+    --font-size-prose: calc(1.25rem + var(--u-multiplier-xs));
     --font-size-small: 0.875rem;
 
     --c-neutral-primary: oklch(27.4% 0.006 286.033);
@@ -40,11 +41,16 @@
     --c-accent-primary: oklch(54.6% 0.245 262.881);
     --c-accent-secondary: oklch(37.9% 0.146 265.522);
     --c-link-visited: oklch(60% 0.118 184.704);
+    --c-selection: oklch(96.2% 0.059 95.617);
 
     @media (width >= 48rem) {
         --grid-gutter: calc(2rem + var(--u-multiplier-lg));
         --grid-popout: calc(4rem + var(--u-multiplier-lg));
     }
+}
+
+::selection {
+  background: var(--c-selection);
 }
 
 body {
@@ -63,7 +69,9 @@ h1 {
 
 h2 {
   margin-bottom: var(--u-space-xs);
-  font: 500 var(--font-size-h2)/var(--font-leading-headings) var(--font-sans);
+  font: 600 var(--font-size-h2)/var(--font-leading-headings) var(--font-sans);
+  font-width: 84%;
+  letter-spacing: -0.025rem;
 }
 
 small {
@@ -89,11 +97,12 @@ a {
 }
 
 .o-prose {
+  font: 400 var(--font-size-prose)/var(--font-leading-body) var(--font-serif-system);
   > p:has(+ :is(p, h1, h2, h3)) {
-    margin-bottom: var(--u-space-lg);
+    margin-bottom: calc(var(--u-space-lg) + var(--u-multiplier-md));
   }
   > figure {
-    margin-block: var(--u-space-lg);
+    margin-block: calc(var(--u-space-lg) + var(--u-multiplier-md));
     &.o-grid__popout > * {
       grid-column: popout;
     }
