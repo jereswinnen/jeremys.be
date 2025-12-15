@@ -1,16 +1,25 @@
 {
-  "file_types": {
-    "Jinja2": ["njk"]
-  },
   "prettier": {
     "allowed": false
   },
   "languages": {
-    "Jinja2": {
+    "HTML": {
       "formatter": {
         "external": {
-          "command": "/Users/jeremy/.nvm/versions/node/v22.21.1/bin/npx",
-          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
+          "command": "/Users/jeremy/Projects/jeremys.be/node_modules/.bin/prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    }
+  },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "includeLanguages": {
+          "nunjucks": "html"
+        },
+        "experimental": {
+          "configFile": "./src/assets/css/tailwind.css"
         }
       }
     }

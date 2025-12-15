@@ -1,12 +1,20 @@
-<header class="o-grid__page">
-  <nav class="site-nav">
-    <a href="/" class="site-logo font-medium font-stretch-semi-condensed"
+<header class="o-grid__content divide-y divide-neutral-tertiary *:py-3">
+  <div>
+    <a
+      href="/"
+      class="font-medium font-stretch-semi-condensed text-neutral-primary!"
       >{{ site.name }}</a
     >
-    <ul class="nav-list">
+    <p class="text-sm font-stretch-semi-condensed text-neutral-secondary">
+      {{ site.description }}
+    </p>
+  </div>
+  <nav>
+    <ul class="flex gap-6">
       {% for item in nav %}
         <li>
           <a
+            class="font-semibold text-lg font-stretch-semi-condensed"
             href="{{ item.url }}"
             {% if page.url == item.url %}aria-current="page"{% endif %}
             >{{ item.label }}</a

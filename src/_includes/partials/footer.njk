@@ -1,22 +1,22 @@
-<footer class="o-grid__page">
+<footer
+  class="o-grid__content flex items-center justify-between text-sm text-neutral-secondary"
+>
   <p>
     &copy;
     {% if page.date %}{{ page.date | date('yyyy') }}{% else %}{{ "now" | date('yyyy') }}{% endif %}
     {{ site.author }}
   </p>
   {% if site.social %}
-    <ul class="social-links">
-      {% if site.social.github %}<li>
-        <a href="https://github.com/{{ site.social.github }}">GitHub</a>
-      </li>{% endif %}
-      {% if site.social.linkedin %}<li>
-        <a href="https://linkedin.com/in/{{ site.social.linkedin }}"
-          >LinkedIn</a
-        >
-      </li>{% endif %}
-      {% if site.social.twitter %}<li>
-        <a href="https://twitter.com/{{ site.social.twitter }}">Twitter</a>
-      </li>{% endif %}
+    <ul class="flex items-center gap-3">
+      {% for name, url in site.social %}
+        <li>
+          <a
+            class="font-stretch-semi-condensed text-current! border-b border-neutral-tertiary"
+            href="{{ url }}"
+            >{{ name | capitalize }}</a
+          >
+        </li>
+      {% endfor %}
     </ul>
   {% endif %}
 </footer>
