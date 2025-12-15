@@ -5,5 +5,12 @@
     "cover": "kirby-air-riders.jpg",
     "platform": "Nintendo Switch 2",
     "status": "Playing"
+  },
+  {
+    "slug": "zelda-totk",
+    "title": "The Legend of Zelda: Tears of the Kingdom",
+    "cover": "zelda-totk.jpg",
+    "platform": "Nintendo Switch 2",
+    "status": "Playing"
   }
 ]

@@ -32,6 +32,7 @@
     --font-leading-body: 1.5;
     --font-size-h1: calc(2.6rem + var(--u-multiplier-md));
     --font-size-h2: calc(1.25rem + var(--u-multiplier-sm));
+    --font-size-h3: calc(1.15rem + var(--u-multiplier-xs));
     --font-size-prose: calc(1.25rem + var(--u-multiplier-xs));
     --font-size-small: 0.875rem;
 
@@ -72,6 +73,10 @@ h2 {
   font: 600 var(--font-size-h2)/var(--font-leading-headings) var(--font-sans);
   font-width: 84%;
   letter-spacing: -0.025rem;
+}
+
+h3 {
+  font: 600 var(--font-size-h3)/var(--font-leading-headings) var(--font-sans);
 }
 
 small {

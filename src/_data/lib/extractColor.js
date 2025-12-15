@@ -67,12 +67,27 @@ function boostSaturation([r, g, b], amount = 1.4) {
   return hslToRgb(h, boostedS, l);
 }
 
+function getLuminance([r, g, b]) {
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+
+function getContrastingTextColor([r, g, b]) {
+  const [h, s, l] = rgbToHsl(r, g, b);
+  // Light bg → darken the color, dark bg → lighten the color
+  const newL = l > 0.5 ? 0.12 : 0.92;
+  const [nr, ng, nb] = hslToRgb(h, s, newL);
+  return `rgb(${nr},${ng},${nb})`;
+}
+
 export async function extractDominantColor(imagePath, { saturate = false, saturationBoost = 1.4 } = {}) {
   try {
     const palette = await ColorThief.getPalette(imagePath, 8);
     const color = findMostVibrant(palette);
     const finalColor = saturate ? boostSaturation(color, saturationBoost) : color;
-    return `rgb(${finalColor.join(",")})`;
+    return {
+      background: `rgb(${finalColor.join(",")})`,
+      text: getContrastingTextColor(finalColor),
+    };
   } catch (error) {
     console.warn(`Could not extract color from ${imagePath}:`, error.message);
     return null;

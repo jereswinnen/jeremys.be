@@ -22,16 +22,23 @@ permalink: /gamelog/
   </p>
 </header>
 
-<ul class="o-grid__page">
+<ul
+  class="o-grid__page flex flex-col items-center md:flex-row md:items-end gap-1 flex-wrap"
+>
   {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
-    <li class="gamelog-item">
-      <div
-        class="w-full h-10"
-        style="background-color: {{ game.dominantColor }};"
-      ></div>
-      <span class="gamelog-title">{{ game.title }}</span>
-      <span class="gamelog-platform">{{ game.platform }}</span>
-      <span class="gamelog-status">{{ game.status }}</span>
+    <li
+      class="p-4 flex items-end justify-between w-(--bar-w) md:w-fit md:min-h-(--bar-h) md:[writing-mode:vertical-rl] md:[text-orientation:mixed]"
+      style="--bar-w: {{ game.barWidth }}%; --bar-h: {{ game.barHeight }}px; --text-color: {{ game.textColor }}; background-color: {{ game.backgroundColor }}; color: var(--text-color);"
+    >
+      <header class="flex flex-col">
+        <h3>{{ game.title }}</h3>
+        <small class="opacity-80" style="color: var(--text-color);"
+          >{{ game.platform }}</small
+        >
+      </header>
+      <small class="opacity-80" style="color: var(--text-color);"
+        >{{ game.status }}</small
+      >
     </li>
   {% endfor %}
 </ul>
