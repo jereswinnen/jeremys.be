@@ -1,24 +1,25 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="post">
-  <header class="post-header">
+
+<article class="o-grid__content bg-amber-100">
+  <header class="o-grid__popout bg-purple-300">
     {% if game %}
       {% set gameData = game | getGame(games) %}
       {% if gameData %}
-      <div class="game-info">
-        {% gameCover game, games %}
-        <span class="game-title">{{ gameData.title }}</span>
-      </div>
+        <div class="game-info">
+          {% gameCover game, games %}
+          <span class="game-title">{{ gameData.title }}</span>
+        </div>
       {% endif %}
     {% endif %}
-    <h1>{{ title }}</h1>
     {% if date %}
-    <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      <time datetime="{{ date | htmlDateString }}"
+        >{{ date | readableDate }}</time
+      >
     {% endif %}
+    <h1>{{ title }}</h1>
   </header>
 
-  <div class="post-content">
-    {{ content | safe }}
-  </div>
+  <div class="post-content">{{ content | safe }}</div>
 </article>

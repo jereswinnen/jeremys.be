@@ -37,6 +37,14 @@ body {
   color: var(--c-neutral-primary);
 }
 
+h1 {
+
+}
+
+h2 {
+
+}
+
 a {
   color: var(--c-accent-primary);
   &:hover {
@@ -102,6 +110,10 @@ a {
         grid-column: content;
         background: plum;
     } */
+
+    > .o-grid__content {
+      grid-column: content;
+    }
 
     > .o-grid__popout {
         grid-column: popout;

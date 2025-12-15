@@ -28,7 +28,7 @@ export default function (eleventyConfig) {
 
   // Date filters
   eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLLL d, yyyy");
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLL d, yyyy 'at' h:mm a").replace(/AM|PM/, m => m.toLowerCase());
   });
 
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
@@ -70,11 +70,6 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addCollection("work", function (collectionApi) {
     return collectionApi.getFilteredByTag("work").sort((a, b) => b.date - a.date);
-  });
-
-  // Set Nunjucks as the template engine for markdown files
-  eleventyConfig.setLibrary("md", eleventyConfig.getMarkdownLibrary?.() || {
-    render: (content) => content
   });
 
   return {
