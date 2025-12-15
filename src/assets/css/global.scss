@@ -7,17 +7,32 @@
 }
 
 :root {
-    --grid-gutter: 1rem;
-    --grid-gutter-row: 2rem;
-    --grid-content: 36rem; //576
-    --grid-popout: 2rem;
-    --grid-page-max: 62.5rem; //1000
+    --grid-gutter: calc(1rem + var(--u-multiplier-lg));
+    --grid-gutter-row: calc(2rem + var(--u-multiplier-xs));
+    --grid-content: calc(40rem + var(--u-multiplier-lg));
+    --grid-popout: calc(2rem + var(--u-multiplier-lg));
+    --grid-page-max: calc(62.5rem + var(--u-multiplier-lg));
     --grid-page: calc((var(--grid-page-max) - var(--grid-content) - var(--grid-popout) * 2) / 2);
+
+    --u-space-xs: 0.35rem;
+    --u-space-sm: 0.75rem;
+    --u-space-md: 1rem;
+    --u-space-lg: 1.25rem;
+
+    --u-multiplier-xs: 0.025vw;
+    --u-multiplier-md: 0.75vw;
+    --u-multiplier-lg: 2vw;
 
     --font-sans: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
     --font-serif-system: -apple-system-ui-serif, ui-serif, 'Georgia', serif;
     --font-mono-system: ui-monospace, SFMono-Regular, ui-monospace, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     --font-stretch-semi-condensed: 87.5%;
+    --font-leading-headings: 1.2;
+    --font-leading-body: 1.5;
+    --font-size-h1: calc(2.6rem + var(--u-multiplier-md));
+    --font-size-h2: calc(1.25rem +  var(--u-multiplier-xs));
+    --font-size-prose: calc(1.25rem +  var(--u-multiplier-xs));
+    --font-size-small: 0.875rem;
 
     --c-neutral-primary: oklch(27.4% 0.006 286.033);
     --c-neutral-secondary: oklch(44.2% 0.017 285.786);
@@ -27,22 +42,34 @@
     --c-link-visited: oklch(60% 0.118 184.704);
 
     @media (width >= 48rem) {
-        --grid-gutter: 2rem;
-        --grid-popout: 4rem;
+        --grid-gutter: calc(2rem + var(--u-multiplier-lg));
+        --grid-popout: calc(4rem + var(--u-multiplier-lg));
     }
 }
 
 body {
-  font: 400 100%/1.5 var(--font-sans);
+  font: 400 100%/var(--font-leading-body) var(--font-sans);
   color: var(--c-neutral-primary);
 }
 
 h1 {
+  font: 800 var(--font-size-h1)/var(--font-leading-headings) var(--font-sans);
+  font-width: 84%;
+  letter-spacing: -0.025rem;
+  &.largeTitle {
 
+  }
 }
 
 h2 {
+  margin-bottom: var(--u-space-xs);
+  font: 500 var(--font-size-h2)/var(--font-leading-headings) var(--font-sans);
+}
 
+small {
+  font: 400 var(--font-size-small)/var(--font-leading-body) var(--font-sans);
+  font-width: var(--font-stretch-semi-condensed);
+  color: var(--c-neutral-secondary);
 }
 
 a {
@@ -58,6 +85,21 @@ a {
   } */
   &[aria-current="page"] {
     color: var(--c-accent-secondary) !important;
+  }
+}
+
+.o-prose {
+  > p:has(+ :is(p, h1, h2, h3)) {
+    margin-bottom: var(--u-space-lg);
+  }
+  > figure {
+    margin-block: var(--u-space-lg);
+    &.o-grid__popout > * {
+      grid-column: popout;
+    }
+    &.o-grid__page > * {
+      grid-column: page;
+    }
   }
 }
 
@@ -87,43 +129,19 @@ a {
     grid-column: content;
 }
 
-// Breakout utilities
-.o-grid__popout {
-    grid-column: popout;
-}
-
-.o-grid__page {
-    grid-column: page;
-}
-
-.o-grid__full {
+// Subgrid container base - spans full, passes grid to children
+%subgrid-container {
     grid-column: full;
-}
-
-// Main inherits the grid via subgrid to allow children to also use breakout classes
-.o-grid > main {
     display: grid;
     grid-template-columns: subgrid;
-    //grid-column: full;
-
-    /* > * {
-        grid-column: content;
-        background: plum;
-    } */
-
-    > .o-grid__content {
-      grid-column: content;
-    }
-
-    > .o-grid__popout {
-        grid-column: popout;
-    }
-
-    > .o-grid__page {
-        grid-column: page;
-    }
-
-    > .o-grid__full {
-        grid-column: full;
-    }
 }
+
+// Breakout utilities - each spans full with subgrid, children default to named zone
+.o-grid__content, .o-grid__popout, .o-grid__page, .o-grid__full {
+    @extend %subgrid-container;
+}
+
+:where(.o-grid__content) > * { grid-column: content; }
+:where(.o-grid__popout) > * { grid-column: popout; }
+:where(.o-grid__page) > * { grid-column: page; }
+:where(.o-grid__full) > * { grid-column: full; }

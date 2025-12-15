@@ -2,8 +2,7 @@
   class="o-grid__content flex items-center justify-between text-sm text-neutral-secondary"
 >
   <p>
-    &copy;
-    {% if page.date %}{{ page.date | date('yyyy') }}{% else %}{{ "now" | date('yyyy') }}{% endif %}
+    &copy; {{ "now" | date('yyyy') }}
     {{ site.author }}
   </p>
   {% if site.social %}

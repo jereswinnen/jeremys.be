@@ -2,8 +2,8 @@
 layout: layouts/base.njk
 ---
 
-<article class="o-grid__content bg-amber-100">
-  <header class="o-grid__popout bg-purple-300">
+<article class="o-grid__content space-y-3 md:space-y-8">
+  <header class="o-grid__popout space-y-2">
     {% if game %}
       {% set gameData = game | getGame(games) %}
       {% if gameData %}
@@ -15,11 +15,13 @@ layout: layouts/base.njk
     {% endif %}
     {% if date %}
       <time datetime="{{ date | htmlDateString }}"
-        >{{ date | readableDate }}</time
+        ><small>{{ date | readableDate }}</small></time
       >
     {% endif %}
     <h1>{{ title }}</h1>
   </header>
 
-  <div class="post-content">{{ content | safe }}</div>
+  <div class="o-grid__content o-prose font-serif-system text-prose">
+    {{ content | safe }}
+  </div>
 </article>

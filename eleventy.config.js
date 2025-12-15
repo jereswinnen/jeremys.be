@@ -1,8 +1,24 @@
 import { DateTime } from "luxon";
+import markdownIt from "markdown-it";
+import markdownItAttrs from "markdown-it-attrs";
+import markdownItImplicitFigures from "markdown-it-implicit-figures";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import shortcodes from "./src/_config/shortcodes/index.js";
 
 export default function (eleventyConfig) {
+  // Markdown config
+  const md = markdownIt({ html: true })
+    .use(markdownItAttrs)
+    .use(markdownItImplicitFigures, {
+      figcaption: true,
+      copyAttrs: "class"
+    });
+
+  // Wrap figcaption content in <small> tags
+  md.renderer.rules.figcaption_open = () => "<figcaption><small>";
+  md.renderer.rules.figcaption_close = () => "</small></figcaption>";
+
+  eleventyConfig.setLibrary("md", md);
   // Plugins
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(shortcodes);
