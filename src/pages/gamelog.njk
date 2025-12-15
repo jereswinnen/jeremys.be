@@ -4,14 +4,34 @@ title: Gamelog
 permalink: /gamelog/
 ---
 
-<h1>Gamelog</h1>
+{% set latestEntry = collections.gamelog | first %}
+<header class="o-grid__content o-prose">
+  {% if latestEntry %}
+    <small
+      >Last updated:
+      <time datetime="{{ latestEntry.date | htmlDateString }}"
+        >{{ latestEntry.date | readableDate }}</time
+      ></small
+    >
+  {% endif %}
+  <h1>Gamelog</h1>
+  <p>
+    Playing games is one of my favorite things to do in my free time. Over the
+    years, I've played a lot of games and this page is an effort in publicly
+    cataloguing this.
+  </p>
+</header>
 
-<ul class="gamelog-list">
-  {% for game in gamesWithColors %}
+<ul class="o-grid__page">
+  {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
     <li class="gamelog-item">
-      <div class="w-full h-10" style="background-color: {{ game.dominantColor }};"></div>
+      <div
+        class="w-full h-10"
+        style="background-color: {{ game.dominantColor }};"
+      ></div>
       <span class="gamelog-title">{{ game.title }}</span>
       <span class="gamelog-platform">{{ game.platform }}</span>
+      <span class="gamelog-status">{{ game.status }}</span>
     </li>
   {% endfor %}
 </ul>

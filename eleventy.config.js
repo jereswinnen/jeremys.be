@@ -63,6 +63,17 @@ export default function (eleventyConfig) {
     return games.find(game => game.slug === slug);
   });
 
+  // Sort games by their latest gamelog entry date
+  eleventyConfig.addFilter("sortByLatestEntry", (games, entries) => {
+    return [...games].sort((a, b) => {
+      const aEntries = entries.filter(e => e.data.game === a.slug);
+      const bEntries = entries.filter(e => e.data.game === b.slug);
+      const aLatest = aEntries.length ? aEntries[0].date : new Date(0);
+      const bLatest = bEntries.length ? bEntries[0].date : new Date(0);
+      return bLatest - aLatest;
+    });
+  });
+
   // Collections
   eleventyConfig.addCollection("articles", function (collectionApi) {
     return collectionApi.getFilteredByTag("articles").sort((a, b) => b.date - a.date);
@@ -72,15 +83,15 @@ export default function (eleventyConfig) {
     return collectionApi.getFilteredByTag("notes").sort((a, b) => b.date - a.date);
   });
 
-  eleventyConfig.addCollection("gaming", function (collectionApi) {
-    return collectionApi.getFilteredByTag("gaming").sort((a, b) => b.date - a.date);
+  eleventyConfig.addCollection("gamelog", function (collectionApi) {
+    return collectionApi.getFilteredByTag("gamelog").sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("blog", function (collectionApi) {
     return [
       ...collectionApi.getFilteredByTag("articles"),
       ...collectionApi.getFilteredByTag("notes"),
-      ...collectionApi.getFilteredByTag("gaming")
+      ...collectionApi.getFilteredByTag("gamelog")
     ].sort((a, b) => b.date - a.date);
   });
 

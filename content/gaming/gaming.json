@@ -1,5 +1,0 @@
-{
-  "layout": "layouts/post.njk",
-  "tags": "gaming",
-  "permalink": "/gaming/{{ page.fileSlug }}/"
-}
