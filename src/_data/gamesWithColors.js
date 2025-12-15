@@ -1,7 +1,7 @@
-import ColorThief from "colorthief";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
+import { extractDominantColor } from "./lib/extractColor.js";
 
 const require = createRequire(import.meta.url);
 const gamesData = require("./games.json");
@@ -14,20 +14,13 @@ export default async function () {
         return game;
       }
 
-      try {
-        const imagePath = path.resolve(
-          __dirname,
-          `../assets/images/games/${game.cover}`
-        );
-        const color = await ColorThief.getColor(imagePath);
-        return {
-          ...game,
-          dominantColor: `rgb(${color.join(",")})`,
-        };
-      } catch (error) {
-        console.warn(`Could not extract color for ${game.title}:`, error.message);
-        return game;
-      }
+      const imagePath = path.resolve(
+        __dirname,
+        `../assets/images/games/${game.cover}`
+      );
+      const dominantColor = await extractDominantColor(imagePath);
+
+      return { ...game, dominantColor };
     })
   );
-};
+}
