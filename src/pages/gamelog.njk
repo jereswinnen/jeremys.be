@@ -22,23 +22,25 @@ permalink: /gamelog/
   </p>
 </header>
 
-<ul
-  class="o-grid__page flex flex-col items-center md:flex-row md:items-end gap-1 flex-wrap"
->
-  {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
-    <li
-      class="p-4 flex items-end justify-between w-(--bar-w) md:w-fit md:min-h-(--bar-h) md:[writing-mode:vertical-rl] md:[text-orientation:mixed]"
-      style="--bar-w: {{ game.barWidth }}%; --bar-h: {{ game.barHeight }}px; --text-color: {{ game.textColor }}; background-color: {{ game.backgroundColor }}; color: var(--text-color);"
-    >
-      <header class="flex flex-col">
-        <h3>{{ game.title }}</h3>
-        <small class="opacity-80" style="color: var(--text-color);"
-          >{{ game.platform }}</small
-        >
-      </header>
-      <small class="opacity-80" style="color: var(--text-color);"
-        >{{ game.status }}</small
+<section class="o-grid__page">
+  <ul
+    class="flex flex-col items-center md:flex-row md:items-end gap-1 flex-wrap"
+  >
+    {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
+      <li
+        class="p-4 flex items-end justify-between w-(--bar-w) md:w-fit md:min-h-(--bar-h) md:[writing-mode:vertical-rl] md:[text-orientation:mixed]"
+        style="--bar-w: {{ game.barWidth }}%; --bar-h: {{ game.barHeight }}px; --text-color: {{ game.textColor }}; background-color: {{ game.backgroundColor }}; color: var(--text-color);"
       >
-    </li>
-  {% endfor %}
-</ul>
+        <header class="flex flex-col">
+          <h3>{{ game.title }}</h3>
+          <small class="opacity-80" style="color: var(--text-color);"
+            >{{ game.platform }}</small
+          >
+        </header>
+        <small class="opacity-80" style="color: var(--text-color);"
+          >{{ game.status }}</small
+        >
+      </li>
+    {% endfor %}
+  </ul>
+</section>
