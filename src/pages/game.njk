@@ -24,8 +24,9 @@ eleventyComputed:
       <p>{{ game.status }}</p>
       <p>{{ game.platform }}</p>
     </div>
+    {% set gameEntries = collections.gamelog | filterByGame(game.slug) %}
     <span class="ml-auto font-bold text-3xl font-stretch-semi-condensed"
-      >23</span
+      >{{ gameEntries.length }}</span
     >
   </div>
 </header>
