@@ -24,22 +24,27 @@ permalink: /gamelog/
 
 <section class="o-grid__page">
   <ul
-    class="flex flex-col items-center md:flex-row md:items-end gap-1 flex-wrap"
+    class="flex flex-col items-center md:flex-row md:items-end gap-2 flex-wrap"
   >
     {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
       <li
-        class="p-4 flex items-end justify-between w-(--bar-w) md:w-fit md:min-h-(--bar-h) md:[writing-mode:vertical-rl] md:[text-orientation:mixed]"
-        style="--bar-w: {{ game.barWidth }}%; --bar-h: {{ game.barHeight }}px; --text-color: {{ game.textColor }}; background-color: {{ game.backgroundColor }}; color: var(--text-color);"
+        class="group md:w-fit md:last:rotate-2 last:origin-bottom-left transition-all duration-300 last:hover:rotate-0"
       >
-        <header class="flex flex-col">
-          <h3>{{ game.title }}</h3>
-          <small class="opacity-80" style="color: var(--text-color);"
-            >{{ game.platform }}</small
-          >
-        </header>
-        <small class="opacity-80" style="color: var(--text-color);"
-          >{{ game.status }}</small
+        <a
+          href="/gamelog/{{ game.slug }}/"
+          class="p-4 flex items-end justify-between w-(--bar-w) md:w-fit md:min-h-(--bar-h) rounded-md text-(--text-color)! bg-(--bg-color) gamelog__bar--bg md:[writing-mode:vertical-rl] md:[text-orientation:mixed] transition-all duration-300 group-hover:opacity-100! group-hover:-translate-y-2 group-hover:last:translate-y-0!"
+          style="--bar-w: {{ game.barWidth }}%; --bar-h: {{ game.barHeight }}px; --text-color: {{ game.textColor }}; --bg-color: {{ game.backgroundColor }}; --bg-cover: url('/assets/images/games/{{ game.cover }}');"
         >
+          <header class="flex flex-col z-10">
+            <h3>{{ game.title }}</h3>
+            <small class="opacity-80" style="color: var(--text-color);"
+              >{{ game.platform }}</small
+            >
+          </header>
+          <small class="opacity-80 z-10" style="color: var(--text-color);"
+            >{{ game.status }}</small
+          >
+        </a>
       </li>
     {% endfor %}
   </ul>

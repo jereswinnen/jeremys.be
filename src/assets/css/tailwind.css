@@ -14,3 +14,14 @@
   --color-link-visited: var(--c-link-visited);
   --color-selection: var(--c-selection);
 }
+
+@layer components {
+  .gamelog__bar--bg {
+    @apply relative bg-(--bg-color);
+  }
+
+  .gamelog__bar--bg::after {
+    content: '';
+    @apply absolute inset-0 rounded-md bg-(image:--bg-cover) bg-cover bg-center mix-blend-luminosity opacity-10 pointer-events-none;
+  }
+}

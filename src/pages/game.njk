@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: gamesWithColors
+  size: 1
+  alias: game
+permalink: /gamelog/{{ game.slug }}/
+eleventyComputed:
+  title: "{{ game.title }} - Gamelog"
+---
+
+<header class="o-grid__content o-prose">
+  <a href="/gamelog/">&larr; Back to Gamelog</a>
+  <h1>{{ game.title }}</h1>
+  <p>{{ game.platform }} &middot; {{ game.status }}</p>
+</header>
+
+<section class="o-grid__content">
+  {% set gameEntries = collections.gamelog | selectattr("data.game", "eq", game.slug) %}
+  {% if gameEntries | length > 0 %}
+    <ul class="space-y-4">
+      {% for entry in gameEntries %}
+        <li>
+          <a href="{{ entry.url }}">
+            <h3>{{ entry.data.title }}</h3>
+            <time datetime="{{ entry.date | htmlDateString }}">{{ entry.date | readableDate }}</time>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No entries yet.</p>
+  {% endif %}
+</section>

@@ -12,5 +12,54 @@
     "cover": "zelda-totk.jpg",
     "platform": "Nintendo Switch 2",
     "status": "Playing"
+  },
+  {
+    "slug": "ac-shadows",
+    "title": "Assassin's Creed Shadows",
+    "cover": "ac-shadows.jpg",
+    "platform": "PlayStation 5",
+    "status": "Playing"
+  },
+  {
+    "slug": "mario-kart-world",
+    "title": "Mario Kart World",
+    "cover": "mario-kart-world.jpg",
+    "platform": "Nintendo Switch 2",
+    "status": "Finished"
+  },
+  {
+    "slug": "powerwash-simulator-2",
+    "title": "Powerwash Simulator 2",
+    "cover": "powerwash-simulator-2.jpg",
+    "platform": "Nintendo Switch 2",
+    "status": "Playing"
+  },
+  {
+    "slug": "ghost-of-yotei",
+    "title": "Ghost of Yotei",
+    "cover": "ghost-of-yotei.jpg",
+    "platform": "PlayStation 5",
+    "status": "Backlog"
+  },
+  {
+    "slug": "hades-2",
+    "title": "Hades II",
+    "cover": "hades-2.jpg",
+    "platform": "Nintendo Switch 2",
+    "status": "Backlog"
+  },
+  {
+    "slug": "kirby-forgotten-land",
+    "title": "Kirby and the Forgotten Land",
+    "cover": "kirby-forgotten-land.jpg",
+    "platform": "Nintendo Switch 2",
+    "status": "Backlog"
+  },
+  {
+    "slug": "octopath-traveler-0",
+    "title": "Octopath Traveler 0",
+    "cover": "octopath-traveler-0.jpg",
+    "platform": "Nintendo Switch 2",
+    "status": "Backlog"
   }
 ]
