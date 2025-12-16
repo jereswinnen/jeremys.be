@@ -30,6 +30,7 @@
     --font-stretch-semi-condensed: 87.5%;
     --font-leading-headings: 1.2;
     --font-leading-body: 1.5;
+    --font-size-body: 1rem;
     --font-size-h1: calc(2.6rem + var(--u-multiplier-md));
     --font-size-h2: calc(1.25rem + var(--u-multiplier-sm));
     --font-size-h3: calc(1.15rem + var(--u-multiplier-xs));
@@ -101,7 +102,7 @@ a {
   }
 }
 
-.o-prose {
+.o-prose, .o-prose--small {
   font: 400 var(--font-size-prose)/var(--font-leading-body) var(--font-serif-system);
   > p:has(+ :is(p, h1, h2, h3)) {
     margin-bottom: calc(var(--u-space-lg) + var(--u-multiplier-md));
@@ -113,6 +114,15 @@ a {
     }
     &.o-grid__page > * {
       grid-column: page;
+    }
+  }
+  &--small {
+    font: 400 var(--font-size-body)/var(--font-leading-body) var(--font-sans);
+    > p:has(+ :is(p, h1, h2, h3)) {
+      margin-bottom: calc(var(--u-space-sm) + var(--u-multiplier-sm));
+    }
+    > figure {
+      margin-block: calc(var(--u-space-sm) + var(--u-multiplier-sm));
     }
   }
 }

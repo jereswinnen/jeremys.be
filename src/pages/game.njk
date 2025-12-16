@@ -9,25 +9,45 @@ eleventyComputed:
   title: "{{ game.title }} - Gamelog"
 ---
 
-<header class="o-grid__content o-prose">
-  <a href="/gamelog/">&larr; Back to Gamelog</a>
+<header class="o-grid__popout space-y-3">
   <h1>{{ game.title }}</h1>
-  <p>{{ game.platform }} &middot; {{ game.status }}</p>
+  <div
+    class="p-4 flex gap-4 items-center rounded-lg text-(--text-color)! bg-(--bg-color) gamelog__bar--bg"
+    style="--text-color: {{ game.textColor }}; --bg-color: {{ game.backgroundColor }}; --bg-cover: url('/assets/images/games/{{ game.cover }}');"
+  >
+    <img
+      class="size-14 shadow-sm"
+      src="/assets/images/games/{{ game.cover }}"
+      alt="{{ game.title }}"
+    />
+    <div class="space-y-0">
+      <p>{{ game.status }}</p>
+      <p>{{ game.platform }}</p>
+    </div>
+    <span class="ml-auto font-bold text-3xl font-stretch-semi-condensed"
+      >23</span
+    >
+  </div>
 </header>
 
-<section class="o-grid__content">
-  {% set gameEntries = collections.gamelog | selectattr("data.game", "eq", game.slug) %}
+<section class="o-grid__content space-y-10">
+  {% set gameEntries = collections.gamelog | filterByGame(game.slug) %}
   {% if gameEntries | length > 0 %}
-    <ul class="space-y-4">
-      {% for entry in gameEntries %}
-        <li>
-          <a href="{{ entry.url }}">
-            <h3>{{ entry.data.title }}</h3>
-            <time datetime="{{ entry.date | htmlDateString }}">{{ entry.date | readableDate }}</time>
+    {% for entry in gameEntries %}
+      <article class="o-grid__content space-y-4">
+        <header class="flex items-center gap-2">
+          <a class="shrink-0" href="{{ entry.url }}">
+            <time datetime="{{ entry.date | htmlDateString }}"
+              ><small>{{ entry.date | readableDate }}</small></time
+            >
           </a>
-        </li>
-      {% endfor %}
-    </ul>
+          <span class="w-full h-px bg-neutral-tertiary"></span>
+        </header>
+        <div class="o-grid__content o-prose--small">
+          {{ entry.content | safe }}
+        </div>
+      </article>
+    {% endfor %}
   {% else %}
     <p>No entries yet.</p>
   {% endif %}

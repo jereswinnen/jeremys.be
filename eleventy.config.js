@@ -63,6 +63,11 @@ export default function (eleventyConfig) {
     return games.find(game => game.slug === slug);
   });
 
+  // Filter gamelog entries by game slug
+  eleventyConfig.addFilter("filterByGame", (entries, gameSlug) => {
+    return entries.filter(entry => entry.data.game === gameSlug);
+  });
+
   // Sort games by their latest gamelog entry date
   eleventyConfig.addFilter("sortByLatestEntry", (games, entries) => {
     return [...games].sort((a, b) => {
