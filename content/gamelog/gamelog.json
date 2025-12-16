@@ -1,5 +1,5 @@
 {
   "layout": "layouts/post.njk",
   "tags": "gamelog",
-  "permalink": "/gamelog/{{ page.fileSlug }}/"
+  "permalink": "/gamelog/{{ page.fileSlug }}/{{ page.date | htmlDateString }}/"
 }

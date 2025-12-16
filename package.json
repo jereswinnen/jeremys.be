@@ -11,7 +11,8 @@
     "build": "pnpm build:tailwind && pnpm build:sass && pnpm build:eleventy",
     "build:eleventy": "eleventy",
     "build:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/tailwind.css --minify",
-    "build:sass": "sass src/assets/css/global.scss:_site/assets/css/global.css --style=compressed"
+    "build:sass": "sass src/assets/css/global.scss:_site/assets/css/global.css --style=compressed",
+    "new:gamelog": "node scripts/new-gamelog.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "luxon": "^3.7.2",
     "prettier": "^3.7.4",
     "prettier-plugin-jinja-template": "^2.1.0",
+    "prompts": "^2.4.2",
     "sass": "^1.96.0",
     "tailwindcss": "^4.1.17"
   },
