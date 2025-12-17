@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: Work
+permalink: /work/
+---
+
+<header class="o-grid__content">
+  <h1>Work</h1>
+</header>
+
+<section class="o-grid__full">
+  {% for project in collections.work %}
+    {% include "partials/project.njk" %}
+  {% endfor %}
+</section>

@@ -1,0 +1,27 @@
+<article
+  class="bg-violet-200 relative o-grid__content py-6 md:py-12 space-y-4 md:space-y-10"
+  data-theme="{{ project.data.title | slugify }}"
+>
+  <div
+    class="invisible md:visible absolute top-6 md:top-12 w-screen h-full -ml-[50vw] left-1/2"
+  >
+    <span
+      class="sticky top-6 md:top-12 left-0 text-[15vh] md:[writing-mode:vertical-lr] md:[text-orientation:mixed]"
+      >{{ project.data.title }}</span
+    >
+  </div>
+  <header class="o-grid__popout">
+    <h2 class="project__title">{{ project.data.title }}</h2>
+    {% if project.data.description %}
+      <p class="project__description">{{ project.data.description }}</p>
+    {% endif %}
+    {% if project.data.skills %}
+      <p class="project__skills">{{ project.data.skills }}</p>
+    {% endif %}
+    {% if project.data.link %}
+      <a href="{{ project.data.link }}" class="project__link">View project</a>
+    {% endif %}
+  </header>
+
+  <div class="o-grid__content o-prose--small">{{ project.content | safe }}</div>
+</article>

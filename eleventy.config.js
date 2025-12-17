@@ -26,6 +26,7 @@ export default function (eleventyConfig) {
   // Passthrough copy
   eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
   eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
+  eleventyConfig.addPassthroughCopy("content/work/**/images/*");
 
   // Dev server: reload on CSS changes from Tailwind/Sass
   eleventyConfig.setServerOptions({
