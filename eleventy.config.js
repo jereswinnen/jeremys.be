@@ -14,7 +14,13 @@ export default function (eleventyConfig) {
       copyAttrs: "class"
     });
 
-  // Wrap figcaption content in <small> tags
+  md.renderer.rules.figure_open = (tokens, idx) => {
+    const token = tokens[idx];
+    const attrs = token.attrs?.map(([k, v]) => `${k}="${v}"`).join(' ') || '';
+    return attrs ? `<figure ${attrs}><div>` : '<figure><div>';
+  };
+
+  md.renderer.rules.figure_close = () => "</div></figure>";
   md.renderer.rules.figcaption_open = () => "<figcaption><small>";
   md.renderer.rules.figcaption_close = () => "</small></figcaption>";
 
@@ -26,6 +32,7 @@ export default function (eleventyConfig) {
   // Passthrough copy
   eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
   eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
   eleventyConfig.addPassthroughCopy("content/work/**/images/*");
 
   // Dev server: reload on CSS changes from Tailwind/Sass
