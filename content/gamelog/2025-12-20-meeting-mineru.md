@@ -1,0 +1,7 @@
+---
+title: Meeting Mineru
+date: 2025-12-20
+game: zelda-totk
+---
+
+The game took such an unexpected turn and meeting Mineru is one of my favorite moments from the whole game. 
