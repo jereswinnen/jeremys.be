@@ -107,6 +107,12 @@ a {
 
 .o-prose, .o-prose--small {
   font: 400 var(--font-size-prose)/var(--font-leading-body) var(--font-serif-system);
+  .spoiler {
+    background: currentColor;
+    &:hover, &:focus {
+      background: transparent;
+    }
+  }
   > p:has(+ :is(p, h1, h2, h3)) {
     margin-bottom: calc(var(--u-space-lg) + var(--u-multiplier-md));
   }

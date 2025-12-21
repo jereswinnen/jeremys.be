@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import markdownItAttrs from "markdown-it-attrs";
 import markdownItImplicitFigures from "markdown-it-implicit-figures";
+import markdownItMark from "markdown-it-mark";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import shortcodes from "./src/_config/shortcodes/index.js";
 
@@ -12,7 +13,8 @@ export default function (eleventyConfig) {
     .use(markdownItImplicitFigures, {
       figcaption: true,
       copyAttrs: "class"
-    });
+    })
+    .use(markdownItMark);
 
   md.renderer.rules.figure_open = (tokens, idx) => {
     const token = tokens[idx];
@@ -23,6 +25,8 @@ export default function (eleventyConfig) {
   md.renderer.rules.figure_close = () => "</div></figure>";
   md.renderer.rules.figcaption_open = () => "<figcaption><small>";
   md.renderer.rules.figcaption_close = () => "</small></figcaption>";
+  md.renderer.rules.mark_open = () => '<mark class="spoiler">';
+  md.renderer.rules.mark_close = () => "</mark>";
 
   eleventyConfig.setLibrary("md", md);
   // Plugins
