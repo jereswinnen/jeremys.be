@@ -2,6 +2,8 @@
 title: "Game of the Day: Cast n Chill"
 date: 2025-12-23
 link: https://www.wombatbrawler.com/cast-n-chill
+tags:
+  - gaming
 ---
 
 While browsing Nintendo's Winter Sale in the eShop the other day, I came across _Cast n Chill_. Made by Australian dev Wombat Brawler, it's a cozy fishing game with a simple premise: you pilot a small boat across lakes, rivers, and oceans, catching fish at your own pace.
