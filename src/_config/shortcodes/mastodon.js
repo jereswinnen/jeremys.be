@@ -18,7 +18,7 @@ export default function (eleventyConfig) {
       <figcaption>
         <small>${author.display_name}</small>
         <small> - </small>
-        <time datetime="${post.created_at}"><small><a href="${url}" rel="noopener">${formattedDate}</a></small></time>
+        <time datetime="${post.created_at}"><small><a href="${url}" rel="noopener" target="_blank">${formattedDate}</a></small></time>
       </figcaption>
     </figure>
     `;
