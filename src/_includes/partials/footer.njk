@@ -8,11 +8,11 @@
       <ul class="flex items-center gap-3">
         {% for name, url in site.social %}
           <li>
-            <a
-              class="font-stretch-semi-condensed text-current! border-b border-neutral-tertiary"
-              href="{{ url }}"
-              >{{ name | capitalize }}</a
-            >
+            <small>
+              <a class="text-current!" href="{{ url }}"
+                >{{ name | capitalize }}</a
+              >
+            </small>
           </li>
         {% endfor %}
       </ul>
