@@ -1,8 +1,8 @@
-—
+---
 title:
 date: 2025-12-16T12:39:16
 game: zelda-totk
-—
+---
 
 I got the Master Sword!
 
