@@ -193,24 +193,6 @@ figure {
       margin: 0;
     }
   }
-  &__play-button {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &::after {
-      content: '';
-      width: 2.5rem;
-      height: 2.5rem;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 50%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 55% center;
-      background-size: 1.25rem;
-    }
-  }
   &__content {
     display: flex;
     flex-direction: column;

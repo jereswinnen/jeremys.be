@@ -11,7 +11,6 @@ function renderLinkCard(card) {
       <a href="${card.url}" class="c-link-card c-link-card--youtube" rel="noopener" target="_blank">
         <div class="c-link-card__thumbnail">
           <img src="${card.image}" alt="" loading="lazy" />
-          <span class="c-link-card__play-button" aria-hidden="true"></span>
         </div>
         <div class="c-link-card__content">
           <span class="c-link-card__title">${card.title || 'YouTube Video'}</span>
@@ -54,12 +53,12 @@ export default function (eleventyConfig) {
     return `
     <figure class="o-prose--small c-quote--mastodon">
       <blockquote>${post.content}</blockquote>
-      ${linkCard}
       <figcaption>
         <small>${author.display_name}</small>
         <small> - </small>
         <time datetime="${post.created_at}"><small><a href="${url}" rel="noopener" target="_blank">${formattedDate}</a></small></time>
       </figcaption>
+      ${linkCard}
     </figure>
     `.replace(/>\s+</g, '><');
   });
