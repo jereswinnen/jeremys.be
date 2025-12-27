@@ -18,7 +18,7 @@ function renderLinkCard(card) {
           <span class="c-link-card__provider">youtube.com</span>
         </div>
       </a>
-    `;
+    `.replace(/>\s+</g, '><');
   }
 
   // Regular link card
@@ -35,7 +35,7 @@ function renderLinkCard(card) {
         <span class="c-link-card__provider">${card.provider_name || new URL(card.url).hostname}</span>
       </div>
     </a>
-  `;
+  `.replace(/>\s+</g, '><');
 }
 
 export default function (eleventyConfig) {
@@ -61,6 +61,6 @@ export default function (eleventyConfig) {
         <time datetime="${post.created_at}"><small><a href="${url}" rel="noopener" target="_blank">${formattedDate}</a></small></time>
       </figcaption>
     </figure>
-    `;
+    `.replace(/>\s+</g, '><');
   });
 }
