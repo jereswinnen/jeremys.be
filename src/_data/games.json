@@ -61,5 +61,12 @@
     "cover": "octopath-traveler-0.jpg",
     "platform": "Nintendo Switch 2",
     "status": "Backlog"
+  },
+  {
+    "slug": "avatar-frontiers-of-pandora",
+    "title": "Avatar Frontiers of Pandora",
+    "cover": "avatar-frontiers-of-pandora.jpeg",
+    "platform": "PlayStation 5",
+    "status": "Playing"
   }
 ]
