@@ -22,5 +22,5 @@ Thumbs.db
 .env.local
 
 # Other
-prompts/
-.prompts/
+prompts
+.prompts
