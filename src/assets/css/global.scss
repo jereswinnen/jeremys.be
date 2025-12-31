@@ -270,6 +270,65 @@ figure {
 :where(.o-grid__page) > * { grid-column: page; }
 :where(.o-grid__full) > * { grid-column: full; }
 
+// Recap Grid & Game Blurb
+.c-recap-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-lg);
+}
+
+.c-game-blurb {
+  display: flex;
+  gap: var(--u-space-md);
+  padding: var(--u-space-md);
+  background: var(--c-neutral-tertiary);
+  border-radius: 0.5rem;
+
+  &__media {
+    flex-shrink: 0;
+    width: 100px;
+    @media (width >= 48rem) {
+      width: 120px;
+    }
+  }
+
+  &__cover {
+    width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__header {
+    margin-bottom: var(--u-space-xs);
+  }
+
+  &__title {
+    font: 600 var(--font-size-body)/1.3 var(--font-sans);
+    margin: 0;
+  }
+
+  &__platform {
+    font: 400 var(--font-size-small)/1 var(--font-sans);
+    color: var(--c-neutral-secondary);
+  }
+
+  &__body {
+    font: 400 var(--font-size-small)/var(--font-leading-body) var(--font-sans);
+    color: var(--c-neutral-secondary);
+    p {
+      margin: 0;
+      &:has(+ p) {
+        margin-bottom: var(--u-space-xs);
+      }
+    }
+  }
+}
+
 /* body[data-theme="helpper"] {
   --c-background: oklch(99% 0.06 330);
   --c-neutral-primary: oklch(45% 0.12 330);
