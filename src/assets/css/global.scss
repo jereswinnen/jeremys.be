@@ -270,14 +270,12 @@ figure {
 :where(.o-grid__page) > * { grid-column: page; }
 :where(.o-grid__full) > * { grid-column: full; }
 
-// Recap Grid & Game Blurb
-.c-recap-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--u-space-lg);
+// Themed Section & Section Item
+.c-themed-section {
+  background: wheat;
 }
 
-.c-game-blurb {
+.c-section-item {
   display: flex;
   gap: var(--u-space-md);
   padding: var(--u-space-md);
@@ -312,7 +310,7 @@ figure {
     margin: 0;
   }
 
-  &__platform {
+  &__subtitle {
     font: 400 var(--font-size-small)/1 var(--font-sans);
     color: var(--c-neutral-secondary);
   }
