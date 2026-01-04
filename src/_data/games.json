@@ -1,72 +1,79 @@
 [
   {
-    "slug": "kirby-air-riders",
-    "title": "Kirby Air Riders",
-    "cover": "kirby-air-riders.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Playing"
+    "cover" : "ac-shadows.jpg",
+    "platform" : "PlayStation 5",
+    "slug" : "ac-shadows",
+    "status" : "Playing",
+    "title" : "Assassin's Creed Shadows"
   },
   {
-    "slug": "zelda-totk",
-    "title": "The Legend of Zelda: Tears of the Kingdom",
-    "cover": "zelda-totk.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Playing"
+    "cover" : "avatar-frontiers-of-pandora.jpeg",
+    "platform" : "PlayStation 5",
+    "slug" : "avatar-frontiers-of-pandora",
+    "status" : "Playing",
+    "title" : "Avatar Frontiers of Pandora"
   },
   {
-    "slug": "ac-shadows",
-    "title": "Assassin's Creed Shadows",
-    "cover": "ac-shadows.jpg",
-    "platform": "PlayStation 5",
-    "status": "Playing"
+    "cover" : "final-fantasy-tactics-ivalice-chronicles.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "final-fantasy-tactics-ivalice-chronicles",
+    "status" : "Backlog",
+    "title" : "Final Fantasy Tactics: The Ivalice Chronicles"
   },
   {
-    "slug": "mario-kart-world",
-    "title": "Mario Kart World",
-    "cover": "mario-kart-world.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Finished"
+    "cover" : "ghost-of-yotei.jpg",
+    "platform" : "PlayStation 5",
+    "slug" : "ghost-of-yotei",
+    "status" : "Backlog",
+    "title" : "Ghost of Yotei"
   },
   {
-    "slug": "powerwash-simulator-2",
-    "title": "Powerwash Simulator 2",
-    "cover": "powerwash-simulator-2.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Playing"
+    "cover" : "hades-2.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "hades-2",
+    "status" : "Backlog",
+    "title" : "Hades II"
   },
   {
-    "slug": "ghost-of-yotei",
-    "title": "Ghost of Yotei",
-    "cover": "ghost-of-yotei.jpg",
-    "platform": "PlayStation 5",
-    "status": "Backlog"
+    "cover" : "kirby-air-riders.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "kirby-air-riders",
+    "status" : "Playing",
+    "title" : "Kirby Air Riders"
   },
   {
-    "slug": "hades-2",
-    "title": "Hades II",
-    "cover": "hades-2.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Backlog"
+    "cover" : "kirby-forgotten-land.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "kirby-forgotten-land",
+    "status" : "Backlog",
+    "title" : "Kirby and the Forgotten Land"
   },
   {
-    "slug": "kirby-forgotten-land",
-    "title": "Kirby and the Forgotten Land",
-    "cover": "kirby-forgotten-land.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Backlog"
+    "cover" : "mario-kart-world.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "mario-kart-world",
+    "status" : "Finished",
+    "title" : "Mario Kart World"
   },
   {
-    "slug": "octopath-traveler-0",
-    "title": "Octopath Traveler 0",
-    "cover": "octopath-traveler-0.jpg",
-    "platform": "Nintendo Switch 2",
-    "status": "Backlog"
+    "cover" : "octopath-traveler-0.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "octopath-traveler-0",
+    "status" : "Backlog",
+    "title" : "Octopath Traveler 0"
   },
   {
-    "slug": "avatar-frontiers-of-pandora",
-    "title": "Avatar Frontiers of Pandora",
-    "cover": "avatar-frontiers-of-pandora.jpeg",
-    "platform": "PlayStation 5",
-    "status": "Playing"
+    "cover" : "powerwash-simulator-2.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "powerwash-simulator-2",
+    "status" : "Playing",
+    "title" : "Powerwash Simulator 2"
+  },
+  {
+    "cover" : "zelda-totk.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "zelda-totk",
+    "status" : "Playing",
+    "title" : "The Legend of Zelda: Tears of the Kingdom"
   }
 ]
