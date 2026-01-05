@@ -111,8 +111,9 @@ export default function (eleventyConfig) {
     posts.forEach(post => {
       const dt = DateTime.fromJSDate(post.date, { zone: "utc" });
       const key = dt.toFormat("yyyy-LL-dd");
-      const label = dt.toFormat("LLLL d, yyyy") + ` (Wk ${dt.weekNumber})`;
-      if (!groups[key]) groups[key] = { key, label, posts: [] };
+      const label = dt.toFormat("LLLL d, yyyy");
+      const week = dt.weekNumber;
+      if (!groups[key]) groups[key] = { key, label, week, posts: [] };
       groups[key].posts.push(post);
     });
     return Object.values(groups).sort((a, b) => b.key.localeCompare(a.key));

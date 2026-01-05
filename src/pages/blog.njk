@@ -5,26 +5,20 @@ permalink: /blog/
 ---
 <h1>Blog</h1>
 
-{% for month in collections.blog | groupByMonth %}
-  <section class="blog-month">
-    <h2>{{ month.label }}</h2>
+{% for day in collections.blog | groupByDay %}
+  <section>
+    <h2>{{ day.label }} <span>Wk {{ day.week }}</span></h2>
 
-    {% for day in month.posts | groupByDay %}
-      <section class="blog-day">
-        <h3 class="day-heading">{{ day.label }}</h3>
+    {% for post in day.posts %}
+      {% set postType = post.data.tags | first %}
 
-        {% for post in day.posts %}
-          {% set postType = post.data.tags | first %}
-
-          {% if postType == "articles" %}
-            {% include "partials/post-article.njk" %}
-          {% elif postType == "notes" %}
-            {% include "partials/post-note.njk" %}
-          {% elif postType == "gamelog" %}
-            {% include "partials/post-gamelog.njk" %}
-          {% endif %}
-        {% endfor %}
-      </section>
+      {% if postType == "articles" %}
+        {% include "partials/post-article.njk" %}
+      {% elif postType == "notes" %}
+        {% include "partials/post-note.njk" %}
+      {% elif postType == "gamelog" %}
+        {% include "partials/post-gamelog.njk" %}
+      {% endif %}
     {% endfor %}
   </section>
 {% endfor %}
