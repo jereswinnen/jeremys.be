@@ -1,0 +1,22 @@
+<article class="post-gamelog">
+  {% if post.data.title %}
+    <h4>{{ post.data.title }}</h4>
+  {% endif %}
+  <div class="post-content o-prose">
+    {{ post.templateContent | safe }}
+  </div>
+  <footer class="post-meta">
+    {% set time = post.date | formatTime %}
+    <a href="{{ post.url }}">
+      <time datetime="{{ post.date | htmlDateString }}">
+        {{ time if time else post.date | readableDate }}
+      </time>
+    </a>
+    {% if post.data.game %}
+      {% set gameData = post.data.game | getGame(games) %}
+      {% if gameData %}
+        <span class="game-name">{{ gameData.title }}</span>
+      {% endif %}
+    {% endif %}
+  </footer>
+</article>

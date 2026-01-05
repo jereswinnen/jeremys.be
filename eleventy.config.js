@@ -92,6 +92,39 @@ export default function (eleventyConfig) {
     });
   });
 
+  // Group posts by month
+  eleventyConfig.addFilter("groupByMonth", (posts) => {
+    const groups = {};
+    posts.forEach(post => {
+      const dt = DateTime.fromJSDate(post.date, { zone: "utc" });
+      const key = dt.toFormat("yyyy-LL");
+      const label = dt.toFormat("LLLL yyyy");
+      if (!groups[key]) groups[key] = { key, label, posts: [] };
+      groups[key].posts.push(post);
+    });
+    return Object.values(groups).sort((a, b) => b.key.localeCompare(a.key));
+  });
+
+  // Group posts by day with week number
+  eleventyConfig.addFilter("groupByDay", (posts) => {
+    const groups = {};
+    posts.forEach(post => {
+      const dt = DateTime.fromJSDate(post.date, { zone: "utc" });
+      const key = dt.toFormat("yyyy-LL-dd");
+      const label = dt.toFormat("LLLL d, yyyy") + ` (Wk ${dt.weekNumber})`;
+      if (!groups[key]) groups[key] = { key, label, posts: [] };
+      groups[key].posts.push(post);
+    });
+    return Object.values(groups).sort((a, b) => b.key.localeCompare(a.key));
+  });
+
+  // Format time, returns empty string if midnight (no time set)
+  eleventyConfig.addFilter("formatTime", (dateObj) => {
+    const dt = DateTime.fromJSDate(dateObj, { zone: "utc" });
+    if (dt.hour === 0 && dt.minute === 0 && dt.second === 0) return "";
+    return dt.toFormat("h:mm a").toLowerCase();
+  });
+
   // Collections
   eleventyConfig.addCollection("articles", function (collectionApi) {
     return collectionApi.getFilteredByTag("articles").sort((a, b) => b.date - a.date);
