@@ -4,6 +4,16 @@
     src: url('/assets/fonts/BricolageGrotesque.woff2') format('woff2') tech('variations');
     font-weight: 200 800;
     font-stretch: 75% 100%;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Commissioner';
+    src: url('/assets/fonts/Commissioner.woff2') format('woff2-variations');
+    src: url('/assets/fonts/Commissioner.woff2') format('woff2') tech('variations');
+    font-weight: 100 900;
+    font-style: oblique 0deg 12deg;
+    font-display: swap;
 }
 
 :root {
@@ -24,7 +34,8 @@
     --u-multiplier-md: 0.75vw;
     --u-multiplier-lg: 2vw;
 
-    --font-sans: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+    --font-sans: 'Commissioner', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+    --font-sans-alt: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
     --font-serif-system: -apple-system-ui-serif, ui-serif, 'Georgia', serif;
     --font-mono-system: ui-monospace, SFMono-Regular, ui-monospace, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     --font-stretch-semi-condensed: 87.5%;
@@ -37,8 +48,8 @@
     --font-size-prose: calc(1.25rem + var(--u-multiplier-xs));
     --font-size-small: 0.875rem;
 
-    --c-background: #fff;
-    --c-neutral-primary: oklch(27.4% 0.006 286.033);
+    --c-background: oklch(0.9418 0.008 73.74); //oklch(0.9099 0.0071 88.65)
+    --c-neutral-primary: oklch(0.2217 0.0019 106.55);
     --c-neutral-secondary: oklch(44.2% 0.017 285.786);
     --c-neutral-tertiary: oklch(92% 0.004 286.32);
     --c-accent-primary: oklch(54.6% 0.245 262.881);
@@ -50,6 +61,11 @@
         --grid-gutter: calc(2rem + var(--u-multiplier-lg));
         --grid-popout: calc(4rem + var(--u-multiplier-lg));
     }
+
+    @media (prefers-color-scheme: dark) {
+      --c-background: oklch(0.2217 0.0019 106.55);
+      --c-neutral-primary: oklch(0.9418 0.008 73.74); //oklch(0.9099 0.0071 88.65)
+    }
 }
 
 ::selection {
@@ -57,7 +73,7 @@
 }
 
 body {
-  font: 400 100%/var(--font-leading-body) var(--font-sans);
+  font: normal 400 100%/var(--font-leading-body) var(--font-sans);
   color: var(--c-neutral-primary);
   background: var(--c-background);
   transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out;
@@ -65,7 +81,8 @@ body {
 
 h1 {
   font: 800 var(--font-size-h1)/var(--font-leading-headings) var(--font-sans);
-  font-width: 84%;
+  font-variation-settings: 'slnt' -4, 'FLAR' 100;
+  /* font-width: 84%; */
   letter-spacing: -0.025rem;
   &.largeTitle {
 
@@ -133,7 +150,7 @@ a {
     }
   }
   &--small {
-    font: 400 var(--font-size-body)/var(--font-leading-body) var(--font-sans);
+    font: 400 var(--font-size-body)/var(--font-leading-body) var(--font-sans-alt);
     > p:has(+ :is(p, h1, h2, h3)) {
       margin-bottom: calc(var(--u-space-sm) + var(--u-multiplier-md));
     }

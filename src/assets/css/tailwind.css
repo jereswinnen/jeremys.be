@@ -2,6 +2,7 @@
 @source "../../**/*.njk";
 
 @theme {
+  --font-sans-alt: var(--font-sans-alt);
   --font-serif-system: var(--font-serif-system);
   --font-mono-system: var(--font-mono-system);
   --text-prose: var(--font-size-prose);
