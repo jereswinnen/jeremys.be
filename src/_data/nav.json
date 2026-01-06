@@ -9,7 +9,8 @@
   },
   {
     "label": "Blog",
-    "url": "/blog/"
+    "url": "/blog/",
+    "matches": ["/articles/", "/notes/"]
   },
   {
     "label": "Gamelog",

@@ -12,7 +12,9 @@
             <a
               class="block pt-10 pb-3.5 px-3.5 uppercase tracking-wider text-neutral-secondary! hover:text-neutral-primary! aria-[current=page]:text-white! aria-[current=page]:bg-accent-primary!"
               href="{{ item.url }}"
-              {% if page.url == item.url %}aria-current="page"{% endif %}
+              {% set isActive = page.url == item.url or (item.url != '/' and page.url.startsWith(item.url)) %}
+              {% if item.matches %}{% for match in item.matches %}{% if page.url.startsWith(match) %}{% set isActive = true %}{% endif %}{% endfor %}{% endif %}
+              {% if isActive %}aria-current="page"{% endif %}
               >{{ item.label }}</a
             >
           </li>
