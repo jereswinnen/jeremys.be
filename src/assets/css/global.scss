@@ -121,7 +121,6 @@ small {
 a {
   color: var(--c-accent-primary);
   &:hover {
-    //opacity: 0.7;
     background: color-mix(in oklch, var(--c-neutral-tertiary), transparent 40%);
   }
   &:active {
@@ -130,9 +129,6 @@ a {
   /* &:visited {
     color: var(--c-link-visited);
   } */
-  &[aria-current="page"] {
-    //color: var(--c-accent-secondary) !important;
-  }
 }
 
 .o-prose, .o-prose--small {

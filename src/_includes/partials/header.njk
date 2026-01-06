@@ -1,28 +1,23 @@
-<header
-  class="o-grid__content divide-y divide-neutral-tertiary font-sans-alt *:py-3"
->
-  <div>
+<header class="o-grid__content text-xs! font-medium!">
+  <div class="flex items-center justify-between">
     <a
       href="/"
-      class="font-medium font-stretch-semi-condensed text-neutral-primary!"
+      class="block pt-10 pb-3.5 px-3.5 uppercase tracking-wider text-neutral-secondary! hover:text-neutral-primary! aria-[current=page]:text-white! aria-[current=page]:bg-accent-primary!"
       >{{ site.name }}</a
     >
-    <p class="text-sm font-stretch-semi-condensed text-neutral-secondary">
-      {{ site.description }}
-    </p>
+    <nav>
+      <ul class="flex">
+        {% for item in nav %}
+          <li>
+            <a
+              class="block pt-10 pb-3.5 px-3.5 uppercase tracking-wider text-neutral-secondary! hover:text-neutral-primary! aria-[current=page]:text-white! aria-[current=page]:bg-accent-primary!"
+              href="{{ item.url }}"
+              {% if page.url == item.url %}aria-current="page"{% endif %}
+              >{{ item.label }}</a
+            >
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
   </div>
-  <nav>
-    <ul class="flex gap-6">
-      {% for item in nav %}
-        <li>
-          <a
-            class="font-semibold text-lg font-stretch-semi-condensed"
-            href="{{ item.url }}"
-            {% if page.url == item.url %}aria-current="page"{% endif %}
-            >{{ item.label }}</a
-          >
-        </li>
-      {% endfor %}
-    </ul>
-  </nav>
 </header>
