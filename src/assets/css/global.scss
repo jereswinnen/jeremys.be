@@ -42,7 +42,8 @@
     --font-leading-headings: 1.2;
     --font-leading-body: 1.5;
     --font-size-body: 1rem;
-    --font-size-h1: calc(4rem + var(--u-multiplier-md));
+    --font-size-h1: calc(2.8rem + var(--u-multiplier-xs));
+    --font-size-h1--large: calc(4rem + var(--u-multiplier-md));
     --font-size-h2: calc(1.1875rem + var(--u-multiplier-xs));
     --font-size-h2--large: calc(2rem + var(--u-multiplier-xs));
     --font-size-h3: calc(1.15rem + var(--u-multiplier-xs));
@@ -68,6 +69,7 @@
       --c-neutral-secondary: oklch(0.6959 0.0178 91.61);
       --c-neutral-tertiary: oklch(0.3171 0.0054 91.55);
       --c-accent-primary: oklch(0.7687 0.1462 132.19);
+      --c-selection: oklch(0.5208 0.0749 102.96);
     }
 }
 
@@ -88,7 +90,8 @@ h1 {
   letter-spacing: -0.025rem;
   color: var(--c-accent-primary);
   &.largeTitle {
-
+    font: 800 var(--font-size-h1--large)/var(--font-leading-headings) var(--font-sans);
+    font-variation-settings: 'slnt' -4, 'FLAR' 100;
   }
 }
 

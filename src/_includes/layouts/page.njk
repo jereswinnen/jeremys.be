@@ -1,15 +1,16 @@
 ---
 layout: layouts/base.njk
 ---
+
 <article class="page">
   <header class="page-header">
-    <h1>{{ title }}</h1>
+    <h1 class="largeTitle">{{ title }}</h1>
     {% if date %}
-    <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      <time datetime="{{ date | htmlDateString }}"
+        >{{ date | readableDate }}</time
+      >
     {% endif %}
   </header>
 
-  <div class="page-content">
-    {{ content | safe }}
-  </div>
+  <div class="page-content">{{ content | safe }}</div>
 </article>

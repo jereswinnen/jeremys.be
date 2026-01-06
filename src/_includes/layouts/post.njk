@@ -3,22 +3,26 @@ layout: layouts/base.njk
 ---
 
 <article class="o-grid__content space-y-4 md:space-y-10">
-  <header class="o-grid__popout space-y-2">
-    {% if game %}
-      {% set gameData = game | getGame(games) %}
-      {% if gameData %}
-        <div class="game-info">
-          {% gameCover game, games %}
-          <span class="game-title">{{ gameData.title }}</span>
-        </div>
+  <header class="o-grid__popout">
+    <div
+      class="flex flex-col items-center gap-2 pt-8 border-t border-neutral-tertiary"
+    >
+      {% if game %}
+        {% set gameData = game | getGame(games) %}
+        {% if gameData %}
+          <div class="game-info">
+            {% gameCover game, games %}
+            <span class="game-title">{{ gameData.title }}</span>
+          </div>
+        {% endif %}
       {% endif %}
-    {% endif %}
-    {% if date %}
-      <time datetime="{{ date | htmlDateString }}"
-        ><small>{{ date | readableDate }}</small></time
-      >
-    {% endif %}
-    {% if title %}<h1>{{ title }}</h1>{% endif %}
+      {% if date %}
+        <time datetime="{{ date | htmlDateString }}"
+          ><small>{{ date | readableDate }}</small></time
+        >
+      {% endif %}
+      {% if title %}<h1>{{ title }}</h1>{% endif %}
+    </div>
   </header>
 
   <div class="o-grid__content o-prose">{{ content | safe }}</div>
