@@ -1,7 +1,8 @@
 ---
-title: My 2024 in Games
-date: 2024-12-31T12:00:00
+title: 2025 Media Recap
+date: 2025-12-31T12:00:00
 description: A look back at the games that defined my year.
+excerpt: This is the excerpt of the post
 ---
 
 What a year for gaming! Here are the highlights that kept me glued to my controllers.

@@ -3,22 +3,36 @@ layout: layouts/base.njk
 title: Blog
 permalink: /blog/
 ---
-<h1>Blog</h1>
 
-{% for day in collections.blog | groupByDay %}
-  <section>
-    <h2>{{ day.label }} <span>Wk {{ day.week }}</span></h2>
+<header class="o-grid__content">
+  <h1>Blog</h1>
+</header>
 
-    {% for post in day.posts %}
-      {% set postType = post.data.tags | first %}
+<section class="o-grid__content space-y-14">
+  {% for day in collections.blog | groupByDay %}
+    <section class="o-grid__content space-y-6">
+      <header class="o-grid__page">
+        <div class="pt-2 border-t border-neutral-tertiary">
+          <div class="flex items-center justify-between">
+            <small>{{ day.label }}</small>
+            <small>Wk {{ day.week }}</small>
+          </div>
+        </div>
+      </header>
 
-      {% if postType == "articles" %}
-        {% include "partials/post-article.njk" %}
-      {% elif postType == "notes" %}
-        {% include "partials/post-note.njk" %}
-      {% elif postType == "gamelog" %}
-        {% include "partials/post-gamelog.njk" %}
-      {% endif %}
-    {% endfor %}
-  </section>
-{% endfor %}
+      <ul class="o-grid__content c-postsList">
+        {% for post in day.posts %}
+          {% set postType = post.data.tags | first %}
+
+          {% if postType == "articles" %}
+            {% include "partials/post-article.njk" %}
+          {% elif postType == "notes" %}
+            {% include "partials/post-note.njk" %}
+          {% elif postType == "gamelog" %}
+            {% include "partials/post-gamelog.njk" %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+</section>

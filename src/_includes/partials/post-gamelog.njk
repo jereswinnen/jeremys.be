@@ -5,7 +5,7 @@
   <div class="o-grid__content o-prose mb-3">
     {{ post.templateContent | safe }}
   </div>
-  <footer class="flex items-center gap-3">
+  <footer class="flex items-center">
     {% set time = post.date | formatTime %}
     <small>
       <a href="{{ post.url }}">
@@ -17,7 +17,12 @@
     {% if post.data.game %}
       {% set gameData = post.data.game | getGame(games) %}
       {% if gameData %}
-        <small>{{ gameData.title }}</small>
+        <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
+        <small
+          ><a href="/gamelog/{{ post.data.game }}/" class="font-medium!"
+            >{{ gameData.title }}</a
+          ></small
+        >
       {% endif %}
     {% endif %}
   </footer>

@@ -5,7 +5,7 @@
   <div class="o-grid__content o-prose mb-3">
     {{ post.templateContent | safe }}
   </div>
-  <footer class="flex items-center gap-3">
+  <footer class="flex items-center">
     {% set time = post.date | formatTime %}
     <small>
       <a href="{{ post.url }}">
@@ -15,9 +15,15 @@
       </a>
     </small>
     {% if post.data.link %}
+      <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
       <small>
         <a href="{{ post.data.link }}" rel="noopener">View source</a>
       </small>
+    {% endif %}
+    {% set displayTags = post.data.tags | excludeTags(["notes"]) %}
+    {% if displayTags.length %}
+      <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
+      <small>Filed under: {{ displayTags | join(", ") }}</small>
     {% endif %}
   </footer>
 </article>

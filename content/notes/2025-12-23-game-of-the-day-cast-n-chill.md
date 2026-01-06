@@ -1,6 +1,6 @@
 ---
 title: "Game of the Day: Cast n Chill"
-date: 2025-12-23
+date: 2025-12-23T15:55:16
 link: https://www.wombatbrawler.com/cast-n-chill
 tags:
   - gaming

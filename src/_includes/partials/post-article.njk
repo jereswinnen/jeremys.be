@@ -1,5 +1,5 @@
 <article class="o-grid__content">
-  <h2 class="text-neutral-secondary">
+  <h2 class="largeTitle text-neutral-secondary">
     <a href="{{ post.url }}">{{ post.data.title }}</a>
   </h2>
   <div class="o-grid__content o-prose mb-3">
@@ -9,21 +9,17 @@
       {{ post.templateContent | safe }}
     {% endif %}
   </div>
-  <footer class="flex items-center gap-3">
+  <footer class="flex items-center">
     {% set time = post.date | formatTime %}
     {% if time %}
       <small>
         <time datetime="{{ post.date | htmlDateString }}">{{ time }}</time>
       </small>
     {% endif %}
-    {% if post.data.tags.length > 1 %}
-      <ul class="flex">
-        {% for tag in post.data.tags %}
-          {% if tag != "articles" %}
-            <li><small>{{ tag }}</small></li>
-          {% endif %}
-        {% endfor %}
-      </ul>
+    {% set displayTags = post.data.tags | excludeTags(["articles"]) %}
+    {% if displayTags.length %}
+      <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
+      <small>Filed under: {{ displayTags | join(", ") }}</small>
     {% endif %}
   </footer>
 </article>

@@ -119,6 +119,11 @@ export default function (eleventyConfig) {
     return Object.values(groups).sort((a, b) => b.key.localeCompare(a.key));
   });
 
+  // Exclude specific tags (for filtering out post type tags)
+  eleventyConfig.addFilter("excludeTags", (tags, excludeList) => {
+    return tags.filter(tag => !excludeList.includes(tag));
+  });
+
   // Format time, returns empty string if midnight (no time set)
   eleventyConfig.addFilter("formatTime", (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: "utc" });

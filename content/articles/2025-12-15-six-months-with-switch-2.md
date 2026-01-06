@@ -1,6 +1,6 @@
 ---
 title: Six Months with Switch 2
-date: 2024-12-15T15:04:00
+date: 2025-12-15T15:04:00
 description: Thoughts on the past 6 months with Nintendo's latest hybrid console.
 ---
 
