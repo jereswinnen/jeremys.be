@@ -58,7 +58,6 @@ export default function (eleventyConfig) {
         <small> - </small>
         <time datetime="${post.created_at}"><small><a href="${url}" rel="noopener" target="_blank">${formattedDate}</a></small></time>
       </figcaption>
-      ${linkCard}
     </figure>
     `.replace(/>\s+</g, '><');
   });
