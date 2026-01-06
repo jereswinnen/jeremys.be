@@ -8,12 +8,12 @@ eleventyExcludeFromCollections: true
   <subtitle>{{ site.description }}</subtitle>
   <link href="{{ site.url }}/feed.xml" rel="self"/>
   <link href="{{ site.url }}/"/>
-  <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <updated>{{ collections.blog | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <id>{{ site.url }}/</id>
   <author>
     <name>{{ site.author }}</name>
   </author>
-  {% for post in collections.posts | reverse %}
+  {% for post in collections.blog | reverse %}
   {% set absolutePostUrl = site.url + post.url %}
   <entry>
     <title>{{ post.data.title }}</title>

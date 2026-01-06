@@ -131,6 +131,23 @@ export default function (eleventyConfig) {
     return dt.toFormat("h:mm a").toLowerCase();
   });
 
+  // Webmention filters
+  eleventyConfig.addFilter("webmentionsByUrl", (webmentions, url) => {
+    const absoluteUrl = `https://jeremys.be${url}`;
+    const normalizedUrl = absoluteUrl.replace(/\/$/, "");
+
+    return webmentions.filter((mention) => {
+      const target = mention["wm-target"];
+      if (!target) return false;
+      const normalizedTarget = target.replace(/\/$/, "");
+      return normalizedTarget === normalizedUrl || normalizedTarget === normalizedUrl + "/";
+    });
+  });
+
+  eleventyConfig.addFilter("webmentionsByType", (webmentions, type) => {
+    return webmentions.filter((mention) => mention["wm-property"] === type);
+  });
+
   // Collections
   eleventyConfig.addCollection("articles", function (collectionApi) {
     return collectionApi.getFilteredByTag("articles").sort((a, b) => b.date - a.date);

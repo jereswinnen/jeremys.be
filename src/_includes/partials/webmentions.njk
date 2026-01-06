@@ -1,0 +1,94 @@
+{% set mentions = webmentions | webmentionsByUrl(page.url) %}
+{% set likes = mentions | webmentionsByType("like-of") %}
+{% set reposts = mentions | webmentionsByType("repost-of") %}
+{% set replies = mentions | webmentionsByType("in-reply-to") %}
+
+{% if mentions.length %}
+<aside class="c-webmentions">
+  <h2 class="text-neutral-secondary">Webmentions</h2>
+
+  {% if likes.length or reposts.length %}
+  <div class="c-webmentions__interactions">
+    {% if likes.length %}
+    <div class="c-webmentions__group">
+      <span class="c-webmentions__label">{{ likes.length }} like{{ "s" if likes.length != 1 }}</span>
+      <ul class="c-webmentions__avatars">
+        {% for like in likes %}
+        <li>
+          <a href="{{ like.author.url }}" title="{{ like.author.name }}" rel="noopener">
+            <img
+              src="{{ like.author.photo or '/assets/images/avatar-default.svg' }}"
+              alt="{{ like.author.name }}"
+              loading="lazy"
+              width="32"
+              height="32"
+            />
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if reposts.length %}
+    <div class="c-webmentions__group">
+      <span class="c-webmentions__label">{{ reposts.length }} boost{{ "s" if reposts.length != 1 }}</span>
+      <ul class="c-webmentions__avatars">
+        {% for repost in reposts %}
+        <li>
+          <a href="{{ repost.author.url }}" title="{{ repost.author.name }}" rel="noopener">
+            <img
+              src="{{ repost.author.photo or '/assets/images/avatar-default.svg' }}"
+              alt="{{ repost.author.name }}"
+              loading="lazy"
+              width="32"
+              height="32"
+            />
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if replies.length %}
+  <div class="c-webmentions__replies">
+    <span class="c-webmentions__label">{{ replies.length }} repl{{ "y" if replies.length == 1 else "ies" }}</span>
+    <ul class="c-webmentions__reply-list">
+      {% for reply in replies %}
+      <li class="c-webmentions__reply">
+        <div class="c-webmentions__reply-header">
+          <a href="{{ reply.author.url }}" rel="noopener">
+            <img
+              src="{{ reply.author.photo or '/assets/images/avatar-default.svg' }}"
+              alt=""
+              loading="lazy"
+              width="40"
+              height="40"
+            />
+          </a>
+          <div>
+            <a href="{{ reply.author.url }}" rel="noopener" class="c-webmentions__author">
+              {{ reply.author.name }}
+            </a>
+            <a href="{{ reply.url }}" rel="noopener">
+              <time datetime="{{ reply.published }}">
+                <small>{{ reply.published | date("LLL d, yyyy") }}</small>
+              </time>
+            </a>
+          </div>
+        </div>
+        {% if reply.content and reply.content.text %}
+        <div class="c-webmentions__reply-content o-prose o-prose--small">
+          {{ reply.content.html | safe if reply.content.html else reply.content.text }}
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</aside>
+{% endif %}

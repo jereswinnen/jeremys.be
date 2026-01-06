@@ -22,4 +22,6 @@ layout: layouts/base.njk
   </header>
 
   <div class="o-grid__content o-prose">{{ content | safe }}</div>
+
+  {% include "partials/webmentions.njk" %}
 </article>
