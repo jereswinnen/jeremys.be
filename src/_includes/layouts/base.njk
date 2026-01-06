@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% if title %}{{ title }} -{% endif %} {{ site.title }}</title>
     <meta name="description" content="{{ description or site.description }}" />
+    <link rel="me" href="{{ site.social.mastodon }}" />
     <link rel="stylesheet" href="/assets/css/tailwind.css" />
     <link rel="stylesheet" href="/assets/css/global.css" />
     <link
@@ -14,7 +15,7 @@
       href="{{ site.url }}/feed.xml"
     />
   </head>
-  <body class="o-grid space-y-6 md:space-y-12 pt-8 text-pretty antialiased">
+  <body class="o-grid space-y-6 md:space-y-12 text-pretty antialiased">
     {% include "partials/header.njk" %}
 
     <main class="o-grid__page space-y-4 md:space-y-14">
