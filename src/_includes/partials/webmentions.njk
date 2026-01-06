@@ -4,25 +4,19 @@
 {% set replies = mentions | webmentionsByType("in-reply-to") %}
 
 {% if mentions.length %}
-<aside class="c-webmentions">
-  <h2 class="text-neutral-secondary">Webmentions</h2>
+<aside class="mt-8 pt-8 border-t border-neutral-tertiary">
+  <h2 class="text-neutral-secondary mb-4">Webmentions</h2>
 
   {% if likes.length or reposts.length %}
-  <div class="c-webmentions__interactions">
+  <div class="flex flex-wrap gap-4 mb-4">
     {% if likes.length %}
-    <div class="c-webmentions__group">
-      <span class="c-webmentions__label">{{ likes.length }} like{{ "s" if likes.length != 1 }}</span>
-      <ul class="c-webmentions__avatars">
+    <div class="flex flex-col gap-1">
+      <small>{{ likes.length }} like{{ "s" if likes.length != 1 }}</small>
+      <ul class="flex flex-wrap gap-1 list-none p-0 m-0">
         {% for like in likes %}
         <li>
-          <a href="{{ like.author.url }}" title="{{ like.author.name }}" rel="noopener">
-            <img
-              src="{{ like.author.photo or '/assets/images/avatar-default.svg' }}"
-              alt="{{ like.author.name }}"
-              loading="lazy"
-              width="32"
-              height="32"
-            />
+          <a href="{{ like.author.url }}" title="{{ like.author.name }}" rel="noopener" class="block hover:opacity-80 hover:bg-transparent">
+            <img src="{{ like.author.photo or '/assets/images/avatar-default.svg' }}" alt="{{ like.author.name }}" loading="lazy" width="32" height="32" class="block w-8 h-8 rounded-full object-cover" />
           </a>
         </li>
         {% endfor %}
@@ -31,19 +25,13 @@
     {% endif %}
 
     {% if reposts.length %}
-    <div class="c-webmentions__group">
-      <span class="c-webmentions__label">{{ reposts.length }} boost{{ "s" if reposts.length != 1 }}</span>
-      <ul class="c-webmentions__avatars">
+    <div class="flex flex-col gap-1">
+      <small>{{ reposts.length }} boost{{ "s" if reposts.length != 1 }}</small>
+      <ul class="flex flex-wrap gap-1 list-none p-0 m-0">
         {% for repost in reposts %}
         <li>
-          <a href="{{ repost.author.url }}" title="{{ repost.author.name }}" rel="noopener">
-            <img
-              src="{{ repost.author.photo or '/assets/images/avatar-default.svg' }}"
-              alt="{{ repost.author.name }}"
-              loading="lazy"
-              width="32"
-              height="32"
-            />
+          <a href="{{ repost.author.url }}" title="{{ repost.author.name }}" rel="noopener" class="block hover:opacity-80 hover:bg-transparent">
+            <img src="{{ repost.author.photo or '/assets/images/avatar-default.svg' }}" alt="{{ repost.author.name }}" loading="lazy" width="32" height="32" class="block w-8 h-8 rounded-full object-cover" />
           </a>
         </li>
         {% endfor %}
@@ -54,34 +42,22 @@
   {% endif %}
 
   {% if replies.length %}
-  <div class="c-webmentions__replies">
-    <span class="c-webmentions__label">{{ replies.length }} repl{{ "y" if replies.length == 1 else "ies" }}</span>
-    <ul class="c-webmentions__reply-list">
+  <div class="flex flex-col gap-2">
+    <small>{{ replies.length }} repl{{ "y" if replies.length == 1 else "ies" }}</small>
+    <ul class="flex flex-col gap-4 list-none p-0 m-0">
       {% for reply in replies %}
-      <li class="c-webmentions__reply">
-        <div class="c-webmentions__reply-header">
-          <a href="{{ reply.author.url }}" rel="noopener">
-            <img
-              src="{{ reply.author.photo or '/assets/images/avatar-default.svg' }}"
-              alt=""
-              loading="lazy"
-              width="40"
-              height="40"
-            />
+      <li class="flex flex-col gap-1 p-3 bg-neutral-tertiary rounded-lg">
+        <div class="flex items-center gap-2">
+          <a href="{{ reply.author.url }}" rel="noopener" class="hover:bg-transparent">
+            <img src="{{ reply.author.photo or '/assets/images/avatar-default.svg' }}" alt="" loading="lazy" width="40" height="40" class="w-10 h-10 rounded-full object-cover" />
           </a>
-          <div>
-            <a href="{{ reply.author.url }}" rel="noopener" class="c-webmentions__author">
-              {{ reply.author.name }}
-            </a>
-            <a href="{{ reply.url }}" rel="noopener">
-              <time datetime="{{ reply.published }}">
-                <small>{{ reply.published | date("LLL d, yyyy") }}</small>
-              </time>
-            </a>
+          <div class="flex flex-col">
+            <a href="{{ reply.author.url }}" rel="noopener" class="font-medium text-neutral-primary no-underline">{{ reply.author.name }}</a>
+            <a href="{{ reply.url }}" rel="noopener"><small>{{ reply.published | date("LLL d, yyyy") }}</small></a>
           </div>
         </div>
         {% if reply.content and reply.content.text %}
-        <div class="c-webmentions__reply-content o-prose o-prose--small">
+        <div class="mt-1 o-prose o-prose--small">
           {{ reply.content.html | safe if reply.content.html else reply.content.text }}
         </div>
         {% endif %}
