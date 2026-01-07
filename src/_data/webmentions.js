@@ -17,7 +17,7 @@ const DUMMY_DATA = [
   { "wm-target": "https://jeremys.be/gamelog/hades-2/2025-12-31/", "wm-property": "like-of", author: { name: "Grace", url: "https://mastodon.social/@grace", photo: "https://i.pravatar.cc/150?u=grace" } },
   { "wm-target": "https://jeremys.be/gamelog/hades-2/2025-12-31/", "wm-property": "in-reply-to", url: "https://mastodon.social/@hank/789", published: "2025-01-06T10:00:00Z", author: { name: "Hank", url: "https://mastodon.social/@hank", photo: "https://i.pravatar.cc/150?u=hank" }, content: { text: "Hades 2 is amazing!", html: "<p>Hades 2 is amazing!</p>" } },
 ];
-const USE_DUMMY_DATA = true; // Set to false to use real data
+const USE_DUMMY_DATA = false; // Set to false to use real data
 // END DUMMY DATA
 
 export default async function () {

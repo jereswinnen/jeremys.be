@@ -46,7 +46,7 @@
     --font-size-h1--large: calc(4rem + var(--u-multiplier-md));
     --font-size-h2: calc(1.1875rem + var(--u-multiplier-xs));
     --font-size-h2--large: calc(2rem + var(--u-multiplier-xs));
-    --font-size-h3: calc(1.15rem + var(--u-multiplier-xs));
+    --font-size-h3: calc(0.875rem + var(--u-multiplier-xs));
     --font-size-prose: calc(var(--font-size-body) + var(--u-multiplier-xs));
     --font-size-small: 0.875rem;
 
@@ -108,7 +108,11 @@ h2 {
 }
 
 h3 {
+  margin-bottom: var(--u-space-xs);
   font: 600 var(--font-size-h3)/var(--font-leading-headings) var(--font-sans);
+  font-variation-settings: 'slnt' -4, 'FLAR' 100;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
 }
 
 small {
