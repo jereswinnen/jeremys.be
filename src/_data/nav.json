@@ -1,11 +1,13 @@
 [
   {
     "label": "Home",
-    "url": "/"
+    "url": "/",
+    "hidden": true
   },
   {
     "label": "Work",
-    "url": "/work/"
+    "url": "/work/",
+    "hidden": true
   },
   {
     "label": "Blog",
@@ -18,6 +20,7 @@
   },
   {
     "label": "About",
-    "url": "/about/"
+    "url": "/about/",
+    "hidden": true
   }
 ]
