@@ -4,8 +4,8 @@
       &copy; {{ "now" | date('yyyy') }}
       {{ site.author }}
     </p>
-    {% if site.social %}
-      <ul class="flex items-center gap-3">
+    <ul class="flex items-center gap-3">
+      {% if site.social %}
         {% for name, url in site.social %}
           <li>
             <small>
@@ -15,7 +15,12 @@
             </small>
           </li>
         {% endfor %}
-      </ul>
-    {% endif %}
+      {% endif %}
+      <li>
+        <small>
+          <a class="text-current!" href="/feed.xml">RSS</a>
+        </small>
+      </li>
+    </ul>
   </div>
 </footer>
