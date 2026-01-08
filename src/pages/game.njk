@@ -9,26 +9,16 @@ eleventyComputed:
   title: "{{ game.title }} - Gamelog"
 ---
 
-<header class="o-grid__popout space-y-3">
-  <h1>{{ game.title }}</h1>
-  <div
-    class="p-4 flex gap-4 items-center rounded-lg text-(--text-color)! bg-(--bg-color) gamelog__bar--bg"
-    style="--text-color: {{ game.textColor }}; --bg-color: {{ game.backgroundColor }}; --bg-cover: url('/assets/images/games/{{ game.cover }}');"
-  >
-    <img
-      class="size-14 shadow-sm"
-      src="/assets/images/games/{{ game.cover }}"
-      alt="{{ game.title }}"
-    />
-    <div class="space-y-0">
-      <p>{{ game.status }}</p>
-      <p>{{ game.platform }}</p>
+<header class="o-grid__popout">
+  <div class="flex flex-col items-center gap-2 pt-8 border-t border-neutral-tertiary">
+    <div class="game-info">
+      {% gameCover game.slug, games %}
+      <span class="game-title">{{ game.title }}</span>
     </div>
     {% set gameEntries = collections.gamelog | filterByGame(game.slug) %}
-    <span class="ml-auto font-bold text-3xl font-stretch-semi-condensed"
-      >{{ gameEntries.length }}</span
-    >
+    <small class="text-neutral-secondary">{{ game.platform }} · {{ game.status }} · {{ gameEntries.length }} entries</small>
   </div>
+  <h1 class="sr-only">{{ game.title }}</h1>
 </header>
 
 <section class="o-grid__content space-y-10">

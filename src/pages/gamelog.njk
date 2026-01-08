@@ -22,28 +22,17 @@ permalink: /gamelog/
   </p>
 </header>
 
-<section class="o-grid__page">
-  <ul
-    class="flex flex-col items-center md:flex-row md:items-end gap-2 flex-wrap"
-  >
+<section class="o-grid__content">
+  <ul class="space-y-2">
     {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
-      <li
-        class="group md:w-fit last:origin-bottom-left md:last:rotate-2 transition-all duration-300 hover:-translate-y-2 last:hover:rotate-0 last:hover:translate-y-0"
-      >
-        <a
-          href="/gamelog/{{ game.slug }}/"
-          class="p-4 flex items-end justify-between w-(--bar-w) md:w-fit md:min-h-(--bar-h) rounded-md text-(--text-color)! bg-(--bg-color) gamelog__bar--bg md:[writing-mode:vertical-rl] md:[text-orientation:mixed] transition-all duration-300 group-hover:opacity-100!"
-          style="--bar-w: {{ game.barWidth }}%; --bar-h: {{ game.barHeight }}px; --text-color: {{ game.textColor }}; --bg-color: {{ game.backgroundColor }}; --bg-cover: url('/assets/images/games/{{ game.cover }}');"
-        >
-          <header class="flex flex-col z-10">
-            <h2>{{ game.title }}</h2>
-            <small class="opacity-80" style="color: var(--text-color);"
-              >{{ game.platform }}</small
-            >
-          </header>
-          <small class="opacity-80 z-10" style="color: var(--text-color);"
-            >{{ game.status }}</small
-          >
+      <li>
+        <a href="/gamelog/{{ game.slug }}/" class="flex items-center gap-4 p-3 rounded-lg hover:bg-neutral-tertiary/20 transition-colors">
+          <img src="/assets/images/games/{{ game.cover }}" alt="" class="size-12 rounded" />
+          <span class="flex-1 font-medium">{{ game.title }}</span>
+          <span class="text-neutral-secondary text-sm">{{ game.platform }}</span>
+          <span class="text-neutral-secondary text-sm">{{ game.status }}</span>
+          {% set count = collections.gamelog | filterByGame(game.slug) | length %}
+          <span class="text-neutral-secondary text-sm">{{ count }} entries</span>
         </a>
       </li>
     {% endfor %}

@@ -19,15 +19,11 @@ export default async function () {
         `../assets/images/games/${game.cover}`
       );
       const colors = await extractDominantColor(imagePath);
-      const barWidth = Math.floor(Math.random() * 20) + 80; // 80-100%
-      const barHeight = Math.floor(Math.random() * 70) + 380; // 380-450px
 
       return {
         ...game,
         backgroundColor: colors?.background,
         textColor: colors?.text,
-        barWidth,
-        barHeight,
       };
     })
   );
