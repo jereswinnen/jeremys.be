@@ -22,17 +22,28 @@ permalink: /gamelog/
   </p>
 </header>
 
-<section class="o-grid__content">
-  <ul class="space-y-2">
+<section class="o-grid__page">
+  <ul>
     {% for game in gamesWithColors | sortByLatestEntry(collections.gamelog) %}
-      <li>
-        <a href="/gamelog/{{ game.slug }}/" class="flex items-center gap-4 p-3 rounded-lg hover:bg-neutral-tertiary/20 transition-colors">
-          <img src="/assets/images/games/{{ game.cover }}" alt="" class="size-12 rounded" />
-          <span class="flex-1 font-medium">{{ game.title }}</span>
-          <span class="text-neutral-secondary text-sm">{{ game.platform }}</span>
-          <span class="text-neutral-secondary text-sm">{{ game.status }}</span>
-          {% set count = collections.gamelog | filterByGame(game.slug) | length %}
-          <span class="text-neutral-secondary text-sm">{{ count }} entries</span>
+      <li class="border-t border-neutral-tertiary py-1">
+        <a
+          href="/gamelog/{{ game.slug }}/"
+          class="group flex items-center gap-4 p-3 rounded-md hover:bg-neutral-tertiary/10 transition-colors"
+        >
+          <img
+            src="/assets/images/games/{{ game.cover }}"
+            alt=""
+            class="size-8 transition-all duration-300 will-change-transform group-hover:scale-110 group-hover:rotate-4"
+          />
+          <h2 class="mb-0! flex-1 text-neutral-primary">{{ game.title }}</h2>
+          <ul class="flex items-center">
+            <small>{{ game.platform }}</small>
+            <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
+            <small>{{ game.status }}</small>
+            <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
+            {% set count = collections.gamelog | filterByGame(game.slug) | length %}
+            <small>{{ count }} entr{{ "y" if count == 1 else "ies" }}</small>
+          </ul>
         </a>
       </li>
     {% endfor %}
