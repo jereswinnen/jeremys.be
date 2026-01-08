@@ -173,6 +173,10 @@ export default function (eleventyConfig) {
     return collectionApi.getFilteredByTag("work").sort((a, b) => b.date - a.date);
   });
 
+  eleventyConfig.addCollection("changelog", function (collectionApi) {
+    return collectionApi.getFilteredByTag("changelog").sort((a, b) => b.date - a.date);
+  });
+
   return {
     dir: {
       input: ".",

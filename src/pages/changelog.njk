@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Changelog
+permalink: /changelog/
+---
+
+<header class="o-grid__content">
+  <h1 class="largeTitle">Changelog</h1>
+</header>
+
+<section class="o-grid__content space-y-8">
+  {% for entry in collections.changelog %}
+    <article class="o-grid__page space-y-2">
+      <header class="flex items-center gap-3">
+        <time datetime="{{ entry.date | htmlDateString }}" class="text-neutral-secondary">
+          {{ entry.date | readableDate }}
+        </time>
+        {% if entry.data.version %}
+          <span class="px-2 py-0.5 text-sm bg-neutral-tertiary rounded">v{{ entry.data.version }}</span>
+        {% endif %}
+      </header>
+      <div class="prose">
+        {{ entry.content | safe }}
+      </div>
+      {% if entry.data.url %}
+        <a href="{{ entry.data.url }}" class="text-sm text-neutral-secondary hover:text-neutral-primary">
+          View this version &rarr;
+        </a>
+      {% endif %}
+    </article>
+  {% else %}
+    <p class="text-neutral-secondary">No changelog entries yet.</p>
+  {% endfor %}
+</section>
