@@ -31,9 +31,10 @@ permalink: /gamelog/
           class="group flex items-center gap-4 p-3 rounded-md hover:bg-neutral-tertiary/10 transition-colors"
         >
           <img
-            src="/assets/images/games/{{ game.cover }}"
+            src="/src/assets/images/games/{{ game.cover }}"
             alt=""
             class="size-8 transition-all duration-300 will-change-transform group-hover:scale-110 group-hover:rotate-4"
+            eleventy:widths="64,128"
           />
           <h2 class="mb-0! flex-1 text-neutral-primary">{{ game.title }}</h2>
           <ul class="flex items-center">

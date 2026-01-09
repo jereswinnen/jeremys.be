@@ -4,6 +4,7 @@ import markdownItAttrs from "markdown-it-attrs";
 import markdownItImplicitFigures from "markdown-it-implicit-figures";
 import markdownItMark from "markdown-it-mark";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import shortcodes from "./src/_config/shortcodes/index.js";
 
 export default function (eleventyConfig) {
@@ -32,6 +33,15 @@ export default function (eleventyConfig) {
   // Plugins
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(shortcodes);
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    extensions: "html",
+    formats: ["avif"],
+    widths: ["auto", 400, 800, 1200],
+    defaultAttributes: {
+      loading: "lazy",
+      decoding: "async"
+    }
+  });
 
   // Passthrough copy
   eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
