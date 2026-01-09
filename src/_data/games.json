@@ -35,6 +35,13 @@
     "title" : "Hades II"
   },
   {
+    "cover" : "keeper.jpg",
+    "platform" : "Xbox Series X",
+    "slug" : "keeper",
+    "status" : "Playing",
+    "title" : "Keeper"
+  },
+  {
     "cover" : "kirby-air-riders.jpg",
     "platform" : "Nintendo Switch 2",
     "slug" : "kirby-air-riders",
