@@ -14,6 +14,13 @@
     "title" : "Avatar Frontiers of Pandora"
   },
   {
+    "cover" : "dragon-quest-vii-reimagined.jpg",
+    "platform" : "Nintendo Switch 2",
+    "slug" : "dragon-quest-vii-reimagined",
+    "status" : "Playing",
+    "title" : "Dragon Quest VII: Reimagined"
+  },
+  {
     "cover" : "final-fantasy-tactics-ivalice-chronicles.jpg",
     "platform" : "Nintendo Switch 2",
     "slug" : "final-fantasy-tactics-ivalice-chronicles",
@@ -33,13 +40,6 @@
     "slug" : "hades-2",
     "status" : "Backlog",
     "title" : "Hades II"
-  },
-  {
-    "cover" : "keeper.jpg",
-    "platform" : "Xbox Series X",
-    "slug" : "keeper",
-    "status" : "Playing",
-    "title" : "Keeper"
   },
   {
     "cover" : "kirby-air-riders.jpg",
