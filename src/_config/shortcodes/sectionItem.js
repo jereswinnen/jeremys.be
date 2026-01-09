@@ -8,8 +8,8 @@ const sourceConfig = {
   books: { subtitleField: "author", imageDir: "books" }
 };
 
-export default function(eleventyConfig) {
-  eleventyConfig.addPairedShortcode("sectionItem", function(content, source, slug) {
+export default function (eleventyConfig) {
+  eleventyConfig.addPairedShortcode("sectionItem", function (content, source, slug) {
     const items = this.ctx?.[source] || [];
     const item = items.find(i => i.slug === slug);
     const config = sourceConfig[source] || { subtitleField: null, imageDir: source };
@@ -23,7 +23,7 @@ export default function(eleventyConfig) {
     let coverHtml = "";
     if (item.cover) {
       const imgSrc = `/src/assets/images/${config.imageDir}/${item.cover}`;
-      coverHtml = `<img src="${imgSrc}" alt="${item.title}" class="c-section-item__cover" sizes="120px" eleventy:widths="200,400">`;
+      coverHtml = `<img src="${imgSrc}" alt="${item.title}" class="c-section-item__cover">`;
     }
 
     // Process content as Markdown and trim to avoid stray whitespace
