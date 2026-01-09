@@ -1,86 +1,93 @@
 [
   {
-    "cover" : "ac-shadows.jpg",
-    "platform" : "PlayStation 5",
-    "slug" : "ac-shadows",
-    "status" : "Playing",
-    "title" : "Assassin's Creed Shadows"
+    "cover": "ac-shadows.jpg",
+    "platform": "PlayStation 5",
+    "slug": "ac-shadows",
+    "status": "Playing",
+    "title": "Assassin's Creed Shadows"
   },
   {
-    "cover" : "avatar-frontiers-of-pandora.jpeg",
-    "platform" : "PlayStation 5",
-    "slug" : "avatar-frontiers-of-pandora",
-    "status" : "Playing",
-    "title" : "Avatar Frontiers of Pandora"
+    "cover": "avatar-frontiers-of-pandora.jpeg",
+    "platform": "PlayStation 5",
+    "slug": "avatar-frontiers-of-pandora",
+    "status": "Playing",
+    "title": "Avatar Frontiers of Pandora"
   },
   {
-    "cover" : "dragon-quest-vii-reimagined.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "dragon-quest-vii-reimagined",
-    "status" : "Playing",
-    "title" : "Dragon Quest VII: Reimagined"
+    "cover": "dragon-quest-vii-reimagined.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "dragon-quest-vii-reimagined",
+    "status": "Playing",
+    "title": "Dragon Quest VII: Reimagined"
   },
   {
-    "cover" : "final-fantasy-tactics-ivalice-chronicles.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "final-fantasy-tactics-ivalice-chronicles",
-    "status" : "Backlog",
-    "title" : "Final Fantasy Tactics: The Ivalice Chronicles"
+    "cover": "final-fantasy-tactics-ivalice-chronicles.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "final-fantasy-tactics-ivalice-chronicles",
+    "status": "Backlog",
+    "title": "Final Fantasy Tactics: The Ivalice Chronicles"
   },
   {
-    "cover" : "ghost-of-yotei.jpg",
-    "platform" : "PlayStation 5",
-    "slug" : "ghost-of-yotei",
-    "status" : "Backlog",
-    "title" : "Ghost of Yotei"
+    "cover": "ghost-of-yotei.jpg",
+    "platform": "PlayStation 5",
+    "slug": "ghost-of-yotei",
+    "status": "Backlog",
+    "title": "Ghost of Yotei"
   },
   {
-    "cover" : "hades-2.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "hades-2",
-    "status" : "Backlog",
-    "title" : "Hades II"
+    "cover": "hades-2.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "hades-2",
+    "status": "Backlog",
+    "title": "Hades II"
   },
   {
-    "cover" : "kirby-air-riders.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "kirby-air-riders",
-    "status" : "Playing",
-    "title" : "Kirby Air Riders"
+    "cover": "keeper.jpg",
+    "platform": "Xbox Series X",
+    "slug": "keeper",
+    "status": "Playing",
+    "title": "Keeper"
   },
   {
-    "cover" : "kirby-forgotten-land.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "kirby-forgotten-land",
-    "status" : "Backlog",
-    "title" : "Kirby and the Forgotten Land"
+    "cover": "kirby-air-riders.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "kirby-air-riders",
+    "status": "Playing",
+    "title": "Kirby Air Riders"
   },
   {
-    "cover" : "mario-kart-world.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "mario-kart-world",
-    "status" : "Finished",
-    "title" : "Mario Kart World"
+    "cover": "kirby-forgotten-land.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "kirby-forgotten-land",
+    "status": "Backlog",
+    "title": "Kirby and the Forgotten Land"
   },
   {
-    "cover" : "octopath-traveler-0.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "octopath-traveler-0",
-    "status" : "Backlog",
-    "title" : "Octopath Traveler 0"
+    "cover": "mario-kart-world.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "mario-kart-world",
+    "status": "Finished",
+    "title": "Mario Kart World"
   },
   {
-    "cover" : "powerwash-simulator-2.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "powerwash-simulator-2",
-    "status" : "Playing",
-    "title" : "Powerwash Simulator 2"
+    "cover": "octopath-traveler-0.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "octopath-traveler-0",
+    "status": "Backlog",
+    "title": "Octopath Traveler 0"
   },
   {
-    "cover" : "zelda-totk.jpg",
-    "platform" : "Nintendo Switch 2",
-    "slug" : "zelda-totk",
-    "status" : "Playing",
-    "title" : "The Legend of Zelda: Tears of the Kingdom"
+    "cover": "powerwash-simulator-2.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "powerwash-simulator-2",
+    "status": "Playing",
+    "title": "Powerwash Simulator 2"
+  },
+  {
+    "cover": "zelda-totk.jpg",
+    "platform": "Nintendo Switch 2",
+    "slug": "zelda-totk",
+    "status": "Playing",
+    "title": "The Legend of Zelda: Tears of the Kingdom"
   }
 ]
