@@ -1,3 +1,4 @@
+import { cpSync, existsSync } from "node:fs";
 import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import markdownItAttrs from "markdown-it-attrs";
@@ -37,18 +38,24 @@ export default function (eleventyConfig) {
     extensions: "html",
     formats: ["avif"],
     widths: ["auto", 400, 800, 1200],
+    outputDir: ".cache/eleventy-img/",
+    urlPath: "/img/",
     defaultAttributes: {
       loading: "lazy",
       decoding: "async"
     }
   });
 
+  // Copy cached images to output after build
+  eleventyConfig.on("eleventy.after", () => {
+    if (existsSync(".cache/eleventy-img/")) {
+      cpSync(".cache/eleventy-img/", "_site/img/", { recursive: true });
+    }
+  });
+
   // Passthrough copy
-  eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
   eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
-  eleventyConfig.addPassthroughCopy("content/work/**/images/*");
-  eleventyConfig.addPassthroughCopy("content/gamelog/**/images/*");
 
   // Dev server: reload on CSS changes from Tailwind/Sass
   eleventyConfig.setServerOptions({
