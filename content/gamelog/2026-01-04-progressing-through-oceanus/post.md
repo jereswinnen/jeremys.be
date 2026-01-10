@@ -1,6 +1,6 @@
 ---
 title: "Progressing through Oceanus"
-date: 2026-01-04T23:08:21
+date: 2026-01-04T23:09:21
 game: "hades-2"
 ---
 Beat ==_Scylla_== in my latest run. Once I knew how to avoid her attacks, she wasn’t too difficult to deal with. 
