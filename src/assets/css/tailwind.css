@@ -7,10 +7,12 @@
   --font-mono--system: var(--font-mono--system);
   --text-prose: var(--font-size-prose);
   --font-stretch-semi-condensed: var(--font-stretch-semi-condensed);
-  --color-primary: var(--primary);
+  --color-primary-oklch: var(--primary-oklch);
+  --color-primary: var(--primary-oklch);
   --color-primary--90: var(--primary--90);
   --color-primary--70: var(--primary--70);
   --color-primary--10: var(--primary--10);
-  --color-secondary: var(--secondary);
+  --color-secondary-oklch: var(--secondary-oklch);
+  --color-secondary: var(--secondary-oklch);
   --color-secondary--70: var(--secondary--70);
 }
