@@ -81,28 +81,6 @@
         --grid-gutter: calc(2rem + var(--u-multiplier-lg));
         --grid-popout: calc(4rem + var(--u-multiplier-lg));
     }
-
-}
-
-/* ::selection {
-  background: var(--c-selection);
-} */
-
-html {
-  background: var(--background--base);
-}
-
-body {
-  font: normal 400 100%/var(--font-leading-body) var(--font-sans);
-  color: var(--primary);
-  transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out;
-  &::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: var(--background--shading);
-  }
 }
 
 :root[data-theme="sunrise"] {
@@ -170,6 +148,27 @@ body {
       oklch(0.4551 0.082 248) 40%,
       var(--background--base) 100%
     );
+  }
+}
+
+/* ::selection {
+  background: var(--c-selection);
+} */
+
+html {
+  background: var(--background--base);
+}
+
+body {
+  font: normal 400 100%/var(--font-leading-body) var(--font-sans);
+  color: var(--primary);
+  transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out;
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--background--shading);
   }
 }
 
