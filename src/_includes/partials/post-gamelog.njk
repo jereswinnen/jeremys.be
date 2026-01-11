@@ -1,6 +1,6 @@
 <article class="o-grid__content">
   {% if post.data.title %}
-    <h2 class="text-neutral-secondary">{{ post.data.title }}</h2>
+    <h2 class="font-sans--alt text-primary">{{ post.data.title }}</h2>
   {% endif %}
   <div class="o-grid__content o-prose mb-3">
     {{ post.templateContent | safe }}
@@ -17,7 +17,7 @@
     {% if post.data.game %}
       {% set gameData = post.data.game | getGame(games) %}
       {% if gameData %}
-        <small class="mx-1.5 text-neutral-secondary opacity-50">/</small>
+        <small class="mx-1.5 text-primary--10">/</small>
         <small
           ><a href="/gamelog/{{ post.data.game }}/" class="font-medium!"
             >{{ gameData.title }}</a

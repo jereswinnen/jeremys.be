@@ -5,7 +5,7 @@ layout: layouts/base.njk
 <article class="o-grid__content space-y-4 md:space-y-10">
   <header class="o-grid__popout">
     <div
-      class="flex flex-col items-center gap-12 pt-2 border-t border-neutral-tertiary"
+      class="flex flex-col items-center gap-12 pt-2 border-t border-primary--10"
     >
       {% if game %}
         {% set gameData = game | getGame(games) %}
@@ -28,7 +28,7 @@ layout: layouts/base.njk
         {% endif %}
       {% endif %}
       <div class="flex flex-col items-center">
-        {% if title %}<h1>{{ title }}</h1>{% endif %}
+        {% if title %}<h1 class="font-sans-alt">{{ title }}</h1>{% endif %}
       </div>
     </div>
   </header>

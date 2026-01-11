@@ -2,17 +2,15 @@
 @source "../../**/*.njk";
 
 @theme {
-  --font-sans-alt: var(--font-sans-alt);
-  --font-serif-system: var(--font-serif-system);
-  --font-mono-system: var(--font-mono-system);
+  --font-sans--alt: var(--font-sans--alt);
+  --font-serif--system: var(--font-serif--system);
+  --font-mono--system: var(--font-mono--system);
   --text-prose: var(--font-size-prose);
   --font-stretch-semi-condensed: var(--font-stretch-semi-condensed);
-  --color-neutral-primary: var(--c-neutral-primary);
-  --color-neutral-secondary: var(--c-neutral-secondary);
-  --color-neutral-tertiary: var(--c-neutral-tertiary);
-  --color-accent-primary: var(--c-accent-primary);
-  --color-accent-secondary: var(--c-accent-secondary);
-  --color-link-visited: var(--c-link-visited);
-  --color-selection: var(--c-selection);
+  --color-primary: var(--primary);
+  --color-primary--90: var(--primary--90);
+  --color-primary--70: var(--primary--70);
+  --color-primary--10: var(--primary--10);
+  --color-secondary: var(--secondary);
+  --color-secondary--70: var(--secondary--70);
 }
-
