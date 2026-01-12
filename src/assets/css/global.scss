@@ -274,7 +274,7 @@ i, em, .spoiler {
 }
 
 header[role="mastHead"] {
-  padding: calc(var(--u-space-lg) + var(--u-multiplier-md)) 0;
+  padding-top: calc(var(--u-space-lg) + var(--u-multiplier-md));
   font: 450 var(--font-size-small)/var(--font-leading-body) var(--font-sans--alt);
   font-variation-settings: 'slnt' -8, 'FLAR' 100;
   letter-spacing: -0.015rem;
