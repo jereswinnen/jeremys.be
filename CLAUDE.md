@@ -72,3 +72,15 @@ Two CSS pipelines output to `_site/assets/css/`:
 - `readableDate` — "January 15, 2024"
 - `htmlDateString` — "2024-01-15"
 - `date` — Custom Luxon format
+
+## Git Commits
+
+Use conventional commit prefixes:
+- `feat:` - New features
+- `fix:` - Bug fixes
+- `docs:` - Documentation changes
+- `chore:` - Maintenance tasks, dependencies
+- `refactor:` - Code restructuring without behavior change
+- `style:` - Formatting, whitespace
+- `test:` - Adding or updating tests
+- `perf:` - Performance improvements
