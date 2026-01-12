@@ -1,18 +1,15 @@
 {% set firstVisibleNav = nav | rejectattr("hidden") | first %}
-<header class="o-grid__content text-xs! font-medium!">
+<header role="mastHead" class="o-grid__content">
   <div class="flex items-center justify-between">
-    <a
-      href="{{ firstVisibleNav.url if firstVisibleNav else '/' }}"
-      class="block pt-10 pb-3.5 px-3.5 uppercase tracking-wider text-neutral-secondary! hover:text-neutral-primary! aria-[current=page]:text-white! aria-[current=page]:bg-accent-primary!"
+    <a href="{{ firstVisibleNav.url if firstVisibleNav else '/' }}"
       >{{ site.name }}</a
     >
     <nav>
-      <ul class="flex">
+      <ul class="flex items-center gap-6">
         {% for item in nav %}
           {% if not item.hidden %}
             <li>
               <a
-                class="block pt-10 pb-3.5 px-3.5 uppercase tracking-wider text-neutral-secondary! hover:text-neutral-primary! aria-[current=page]:text-white! aria-[current=page]:bg-accent-primary!"
                 href="{{ item.url }}"
                 {% set isActive = page.url == item.url or (item.url != '/' and page.url.startsWith(item.url)) %}
                 {% if item.matches %}{% for match in item.matches %}{% if page.url.startsWith(match) %}{% set isActive = true %}{% endif %}{% endfor %}{% endif %}

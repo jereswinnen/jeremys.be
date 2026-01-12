@@ -57,6 +57,8 @@
     --font-size-prose: calc(var(--font-size-body) + var(--u-multiplier-xs));
     --font-size-small: 0.875rem;
 
+    --ease-circ: cubic-bezier(0.645, 0, 0.045, 1);
+
     --primary-oklch: 0.331 0.1198 269.89;
     --primary: oklch(var(--primary-oklch));
     --primary--90: oklch(var(--primary-oklch) / 90%);
@@ -268,6 +270,28 @@ i, em, .spoiler {
         margin-block-end: var(--u-space-xs);
       } */
     }
+  }
+}
+
+header[role="mastHead"] {
+  padding: calc(var(--u-space-lg) + var(--u-multiplier-md)) 0;
+  font: 450 var(--font-size-small)/var(--font-leading-body) var(--font-sans--alt);
+  font-variation-settings: 'slnt' -8, 'FLAR' 100;
+  letter-spacing: -0.015rem;
+  color: var(--secondary);
+  a, nav ul li a {
+    color: var(--primary--70);
+    text-shadow: 0 1px 2px var(--primary--10);
+    transition: all .24s var(--ease-circ);
+    &:hover {
+      color: var(--secondary);
+      background: transparent;
+    }
+  }
+  a:first-of-type:not(nav ul li a), nav ul li a[aria-current="page"] {
+    font-weight: 550;
+    color: var(--secondary);
+    background: transparent;
   }
 }
 
