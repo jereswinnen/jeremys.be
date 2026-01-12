@@ -1,4 +1,22 @@
 ---
+permalink: /
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=/blog/" />
+  <link rel="canonical" href="/blog/" />
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to <a href="/blog/">/blog/</a>...</p>
+</body>
+</html>
+
+{# TODO: Restore homepage later - remove redirect above and use this:
+---
 layout: layouts/base.njk
 title: Home
 permalink: /
@@ -37,3 +55,4 @@ permalink: /
     {% endfor %}
   </ul>
 </section>
+#}
