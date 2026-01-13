@@ -2,7 +2,7 @@
 date: 2026-01-11T23:54:52
 game: "dragon-quest-vii-reimagined"
 ---
-Nearing the end of the Dragon Quest VII: Reimagined demo. It’s not too long with a runtime of around 4 hours, but it gives a good idea of what to expect from the full game. 
+Nearing the end of the _Dragon Quest VII: Reimagined_ demo. It’s not too long with a runtime of around 4 hours, but it gives a good idea of what to expect from the full game. 
 
 Really liking the art style and the performance is very stable on Switch 2. 
 

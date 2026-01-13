@@ -2,7 +2,7 @@
 date: 2026-01-09T23:57:41
 game: "dragon-quest-vii-reimagined"
 ---
-Very much enjoying Dragon Quest VII: Reimagined. Quite a cozy game to play at the end of the day. The design, and especially the names, of the enemies always give me a good chuckle. 
+Very much enjoying _Dragon Quest VII: Reimagined_. Quite a cozy game to play at the end of the day. The design, and especially the names, of the enemies always give me a good chuckle. 
 
 May I present **_Tongue Fu Fighter_**?
 
