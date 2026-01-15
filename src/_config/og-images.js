@@ -65,22 +65,18 @@ function loadFonts() {
   const regularPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
   const boldPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskBold.ttf");
 
-  // Use readFileSync and convert to ArrayBuffer properly for Satori
   const regularBuffer = readFileSync(regularPath);
   const boldBuffer = readFileSync(boldPath);
 
-  // Convert Node.js Buffer to ArrayBuffer (copy to ensure clean buffer)
-  const regular = regularBuffer.buffer.slice(
-    regularBuffer.byteOffset,
-    regularBuffer.byteOffset + regularBuffer.byteLength
-  );
-  const bold = boldBuffer.buffer.slice(
-    boldBuffer.byteOffset,
-    boldBuffer.byteOffset + boldBuffer.byteLength
-  );
+  // Create fresh ArrayBuffers by copying data (avoids shared buffer issues)
+  const regular = new ArrayBuffer(regularBuffer.length);
+  new Uint8Array(regular).set(regularBuffer);
+
+  const bold = new ArrayBuffer(boldBuffer.length);
+  new Uint8Array(bold).set(boldBuffer);
 
   fonts = { regular, bold };
-  console.log("[og-images] Fonts loaded successfully");
+  console.log(`[og-images] Fonts loaded: regular=${regular.byteLength} bytes, bold=${bold.byteLength} bytes`);
   return fonts;
 }
 
