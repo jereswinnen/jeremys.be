@@ -58,24 +58,15 @@ async function loadImageAsBase64(imagePath) {
   }
 }
 
-// Convert Node.js Buffer to ArrayBuffer (required by Satori)
-function bufferToArrayBuffer(buffer) {
-  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
-}
-
 async function loadFonts() {
   if (fonts) return fonts;
 
-  // Load PP Radio Grotesk fonts from local TTF files
+  // Load PP Radio Grotesk fonts from local TTF files as Uint8Array (required by Satori)
   const radioGroteskRegularPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
   const radioGroteskBoldPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskBold.ttf");
 
-  const radioGroteskRegularBuffer = await readFile(radioGroteskRegularPath);
-  const radioGroteskBoldBuffer = await readFile(radioGroteskBoldPath);
-
-  // Convert Buffers to ArrayBuffers for Satori
-  const radioGroteskRegular = bufferToArrayBuffer(radioGroteskRegularBuffer);
-  const radioGroteskBold = bufferToArrayBuffer(radioGroteskBoldBuffer);
+  const radioGroteskRegular = new Uint8Array(await readFile(radioGroteskRegularPath));
+  const radioGroteskBold = new Uint8Array(await readFile(radioGroteskBoldPath));
 
   fonts = { radioGroteskRegular, radioGroteskBold };
   return fonts;
