@@ -7,6 +7,7 @@ import markdownItMark from "markdown-it-mark";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import shortcodes from "./src/_config/shortcodes/index.js";
+import { generateAllOgImages } from "./src/_config/og-images.js";
 
 export default function (eleventyConfig) {
   // Markdown config
@@ -51,6 +52,22 @@ export default function (eleventyConfig) {
     if (existsSync(".cache/eleventy-img/")) {
       cpSync(".cache/eleventy-img/", "_site/img/", { recursive: true });
     }
+  });
+
+  // Store collections for OG image generation
+  let blogCollection = [];
+  eleventyConfig.addCollection("blogWithOg", function (collectionApi) {
+    blogCollection = [
+      ...collectionApi.getFilteredByTag("articles"),
+      ...collectionApi.getFilteredByTag("notes"),
+      ...collectionApi.getFilteredByTag("gamelog")
+    ].sort((a, b) => b.date - a.date);
+    return blogCollection;
+  });
+
+  // Generate OG images after build
+  eleventyConfig.on("eleventy.after", async () => {
+    await generateAllOgImages({ blog: blogCollection }, "_site", "Jeremy Swinnen");
   });
 
   // Passthrough copy
@@ -139,6 +156,27 @@ export default function (eleventyConfig) {
   // Exclude specific tags (for filtering out post type tags)
   eleventyConfig.addFilter("excludeTags", (tags, excludeList) => {
     return tags.filter(tag => !excludeList.includes(tag));
+  });
+
+  // Convert URL to OG image slug (e.g., /gamelog/zelda-totk/2025-12-21/ -> gamelog-zelda-totk-2025-12-21)
+  eleventyConfig.addFilter("ogSlug", (url) => {
+    if (!url) return null;
+    return url.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+  });
+
+  // Extract first content image URL from HTML (skips small icons)
+  eleventyConfig.addFilter("firstImage", (content) => {
+    if (!content) return null;
+    // Match all img tags, then filter out small icons (size-* class)
+    const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/g;
+    let match;
+    while ((match = imgRegex.exec(content)) !== null) {
+      // Skip images with size-* classes (typically small icons)
+      if (!match[0].includes('class="size-')) {
+        return match[1];
+      }
+    }
+    return null;
   });
 
   // Format time, returns empty string if midnight (no time set)

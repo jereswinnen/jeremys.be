@@ -6,6 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% if title %}{{ title }} -{% endif %} {{ site.title }}</title>
     <meta name="description" content="{{ description or site.description }}" />
+
+    {# Open Graph #}
+    {% set isBlogPost = tags and ('articles' in tags or 'notes' in tags or 'gamelog' in tags) %}
+    {% if isBlogPost %}
+      {% set ogSlug = page.url | ogSlug %}
+      {% set ogImage = site.url + "/og/" + ogSlug + ".png" %}
+    {% else %}
+      {% set ogImage = site.url + "/assets/images/og-default.jpg" %}
+    {% endif %}
+
+    <meta property="og:title" content="{{ title or site.title }}" />
+    <meta property="og:description" content="{{ description or site.description }}" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta property="og:type" content="{% if tags and ('articles' in tags or 'notes' in tags or 'gamelog' in tags) %}article{% else %}website{% endif %}" />
+    <meta property="og:image" content="{{ ogImage }}" />
+
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
     <link rel="me" href="{{ site.social.mastodon }}" />
     <link rel="me" href="{{ site.social.github }}" />
     <link rel="webmention" href="https://webmention.io/jeremys.be/webmention" />
