@@ -10,11 +10,9 @@ While browsing Nintendo's Winter Sale in the eShop the other day, I came across 
 
 But what caught my eye is the art style. I mean, look at it:
 
-<!-- TODO: Download these images locally - they timeout on Vercel
 ![](https://images.squarespace-cdn.com/content/v1/63e1d311f9af4b66fa158ccb/cc3bef7d-7911-43dd-bc50-1914ff370533/CastnChill-WatchersPoint-Driving-HD.png "Cast n Chill"){.o-grid__popout}
 
 ![](https://images.squarespace-cdn.com/content/v1/63e1d311f9af4b66fa158ccb/4824f78e-dc0c-44a2-9b00-6e556d35ded7/CastnChill-Shop-HD-EN.png "Cast n Chill"){.o-grid__popout}
--->
 
 A few others, including Ged Maheux, seemed to agree:
 
