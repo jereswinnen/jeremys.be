@@ -61,15 +61,14 @@ async function loadImageAsBase64(imagePath) {
 async function loadFonts() {
   if (fonts) return fonts;
 
-  // Load PP Radio Grotesk Regular from local TTF file
-  const radioGroteskPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
-  const radioGroteskData = await readFile(radioGroteskPath);
+  // Load PP Radio Grotesk fonts from local TTF files
+  const radioGroteskRegularPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
+  const radioGroteskBoldPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskBold.ttf");
 
-  // Load Commissioner from local woff2 file
-  const commissionerPath = join(process.cwd(), "src/assets/fonts/Commissioner.woff2");
-  const commissionerData = await readFile(commissionerPath);
+  const radioGroteskRegular = await readFile(radioGroteskRegularPath);
+  const radioGroteskBold = await readFile(radioGroteskBoldPath);
 
-  fonts = { radioGrotesk: radioGroteskData, commissioner: commissionerData };
+  fonts = { radioGroteskRegular, radioGroteskBold };
   return fonts;
 }
 
@@ -112,15 +111,14 @@ function createTemplate(title, date, imageData) {
               gap: "16px",
             },
             children: [
-              // Date (Commissioner Medium, 70% opacity, slanted)
+              // Date (PP Radio Grotesk Bold, 70% opacity, slanted)
               date && {
                 type: "div",
                 props: {
                   style: {
                     fontSize: "16px",
-                    fontFamily: "Commissioner",
-                    fontWeight: 500,
-                    fontStyle: "italic",
+                    fontFamily: "PP Radio Grotesk",
+                    fontWeight: 700,
                     transform: "skewX(-8deg)",
                     color: "rgba(62, 52, 40, 0.7)",
                   },
@@ -198,7 +196,7 @@ async function generateOgImage(post, outputDir, siteName, gamesData = []) {
     }
   }
 
-  const { radioGrotesk, commissioner } = await loadFonts();
+  const { radioGroteskRegular, radioGroteskBold } = await loadFonts();
 
   const svg = await satori(createTemplate(title, date, imageData), {
     width: 1200,
@@ -206,14 +204,14 @@ async function generateOgImage(post, outputDir, siteName, gamesData = []) {
     fonts: [
       {
         name: "PP Radio Grotesk",
-        data: radioGrotesk,
+        data: radioGroteskRegular,
         weight: 400,
         style: "normal",
       },
       {
-        name: "Commissioner",
-        data: commissioner,
-        weight: 500,
+        name: "PP Radio Grotesk",
+        data: radioGroteskBold,
+        weight: 700,
         style: "normal",
       },
     ],
