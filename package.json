@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "concurrently \"pnpm:dev:*\"",
     "dev:eleventy": "eleventy --serve --watch",
