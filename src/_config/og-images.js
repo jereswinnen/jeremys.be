@@ -4,8 +4,6 @@ import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-// Cache font loading
-let fonts = null;
 
 // Extract first content image from HTML (skips small icons)
 function extractFirstImage(content) {
@@ -59,25 +57,28 @@ async function loadImageAsBase64(imagePath) {
 }
 
 function loadFonts() {
-  if (fonts) return fonts;
-
-  // Load PP Radio Grotesk fonts from local TTF files
+  // Don't cache - load fresh each time to avoid potential buffer issues
   const regularPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
   const boldPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskBold.ttf");
 
   const regularBuffer = readFileSync(regularPath);
   const boldBuffer = readFileSync(boldPath);
 
-  // Create fresh ArrayBuffers by copying data (avoids shared buffer issues)
+  // Create fresh ArrayBuffers by copying data byte-by-byte
   const regular = new ArrayBuffer(regularBuffer.length);
-  new Uint8Array(regular).set(regularBuffer);
+  const regularView = new Uint8Array(regular);
+  for (let i = 0; i < regularBuffer.length; i++) {
+    regularView[i] = regularBuffer[i];
+  }
 
   const bold = new ArrayBuffer(boldBuffer.length);
-  new Uint8Array(bold).set(boldBuffer);
+  const boldView = new Uint8Array(bold);
+  for (let i = 0; i < boldBuffer.length; i++) {
+    boldView[i] = boldBuffer[i];
+  }
 
-  fonts = { regular, bold };
   console.log(`[og-images] Fonts loaded: regular=${regular.byteLength} bytes, bold=${bold.byteLength} bytes`);
-  return fonts;
+  return { regular, bold };
 }
 
 // Format date as "January 15, 2025"
