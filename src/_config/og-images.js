@@ -1,7 +1,7 @@
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 // Cache font loading
@@ -58,38 +58,30 @@ async function loadImageAsBase64(imagePath) {
   }
 }
 
-async function loadFonts() {
+function loadFonts() {
   if (fonts) return fonts;
 
-  // Use Inter from jsDelivr CDN (@fontsource) - stable URLs
-  const interRegularUrl = "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/files/inter-latin-400-normal.woff";
-  const interBoldUrl = "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/files/inter-latin-700-normal.woff";
+  // Load PP Radio Grotesk fonts from local TTF files
+  const regularPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
+  const boldPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskBold.ttf");
 
-  try {
-    const [regularRes, boldRes] = await Promise.all([
-      fetch(interRegularUrl),
-      fetch(interBoldUrl),
-    ]);
+  // Use readFileSync and convert to ArrayBuffer properly for Satori
+  const regularBuffer = readFileSync(regularPath);
+  const boldBuffer = readFileSync(boldPath);
 
-    if (!regularRes.ok || !boldRes.ok) {
-      throw new Error(`Font fetch failed: regular=${regularRes.status}, bold=${boldRes.status}`);
-    }
+  // Convert Node.js Buffer to ArrayBuffer (copy to ensure clean buffer)
+  const regular = regularBuffer.buffer.slice(
+    regularBuffer.byteOffset,
+    regularBuffer.byteOffset + regularBuffer.byteLength
+  );
+  const bold = boldBuffer.buffer.slice(
+    boldBuffer.byteOffset,
+    boldBuffer.byteOffset + boldBuffer.byteLength
+  );
 
-    const [regularData, boldData] = await Promise.all([
-      regularRes.arrayBuffer(),
-      boldRes.arrayBuffer(),
-    ]);
-
-    fonts = {
-      regular: regularData,
-      bold: boldData,
-    };
-    console.log("[og-images] Fonts loaded successfully");
-    return fonts;
-  } catch (error) {
-    console.error("[og-images] Failed to load fonts:", error.message);
-    throw error;
-  }
+  fonts = { regular, bold };
+  console.log("[og-images] Fonts loaded successfully");
+  return fonts;
 }
 
 // Format date as "January 15, 2025"
@@ -131,13 +123,13 @@ function createTemplate(title, date, imageData) {
               gap: "16px",
             },
             children: [
-              // Date (Inter Bold, 70% opacity, slanted)
+              // Date (PP Radio Grotesk Bold, 70% opacity, slanted)
               date && {
                 type: "div",
                 props: {
                   style: {
                     fontSize: "16px",
-                    fontFamily: "Inter",
+                    fontFamily: "PP Radio Grotesk",
                     fontWeight: 700,
                     transform: "skewX(-8deg)",
                     color: "rgba(62, 52, 40, 0.7)",
@@ -151,7 +143,7 @@ function createTemplate(title, date, imageData) {
                 props: {
                   style: {
                     fontSize: title.length > 60 ? "42px" : title.length > 30 ? "52px" : "64px",
-                    fontFamily: "Inter",
+                    fontFamily: "PP Radio Grotesk",
                     fontWeight: 400,
                     lineHeight: 1.05,
                     letterSpacing: "-0.025em",
@@ -216,20 +208,20 @@ async function generateOgImage(post, outputDir, siteName, gamesData = []) {
     }
   }
 
-  const { regular, bold } = await loadFonts();
+  const { regular, bold } = loadFonts();
 
   const svg = await satori(createTemplate(title, date, imageData), {
     width: 1200,
     height: 630,
     fonts: [
       {
-        name: "Inter",
+        name: "PP Radio Grotesk",
         data: regular,
         weight: 400,
         style: "normal",
       },
       {
-        name: "Inter",
+        name: "PP Radio Grotesk",
         data: bold,
         weight: 700,
         style: "normal",
