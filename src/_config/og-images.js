@@ -61,10 +61,9 @@ async function loadImageAsBase64(imagePath) {
 async function loadFonts() {
   if (fonts) return fonts;
 
-  // Use Inter from Google Fonts - well-tested with Satori
-  // These are stable Google Fonts URLs that return TTF files
-  const interRegularUrl = "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff";
-  const interBoldUrl = "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff";
+  // Use Inter from jsDelivr CDN (@fontsource) - stable URLs
+  const interRegularUrl = "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/files/inter-latin-400-normal.woff";
+  const interBoldUrl = "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/files/inter-latin-700-normal.woff";
 
   try {
     const [regularRes, boldRes] = await Promise.all([
