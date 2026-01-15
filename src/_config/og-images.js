@@ -61,15 +61,36 @@ async function loadImageAsBase64(imagePath) {
 async function loadFonts() {
   if (fonts) return fonts;
 
-  // Load PP Radio Grotesk fonts from local TTF files as Uint8Array (required by Satori)
-  const radioGroteskRegularPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
-  const radioGroteskBoldPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskBold.ttf");
+  // Use Inter from Google Fonts - well-tested with Satori
+  // These are stable Google Fonts URLs that return TTF files
+  const interRegularUrl = "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff";
+  const interBoldUrl = "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff";
 
-  const radioGroteskRegular = new Uint8Array(await readFile(radioGroteskRegularPath));
-  const radioGroteskBold = new Uint8Array(await readFile(radioGroteskBoldPath));
+  try {
+    const [regularRes, boldRes] = await Promise.all([
+      fetch(interRegularUrl),
+      fetch(interBoldUrl),
+    ]);
 
-  fonts = { radioGroteskRegular, radioGroteskBold };
-  return fonts;
+    if (!regularRes.ok || !boldRes.ok) {
+      throw new Error(`Font fetch failed: regular=${regularRes.status}, bold=${boldRes.status}`);
+    }
+
+    const [regularData, boldData] = await Promise.all([
+      regularRes.arrayBuffer(),
+      boldRes.arrayBuffer(),
+    ]);
+
+    fonts = {
+      regular: regularData,
+      bold: boldData,
+    };
+    console.log("[og-images] Fonts loaded successfully");
+    return fonts;
+  } catch (error) {
+    console.error("[og-images] Failed to load fonts:", error.message);
+    throw error;
+  }
 }
 
 // Format date as "January 15, 2025"
@@ -111,13 +132,13 @@ function createTemplate(title, date, imageData) {
               gap: "16px",
             },
             children: [
-              // Date (PP Radio Grotesk Bold, 70% opacity, slanted)
+              // Date (Inter Bold, 70% opacity, slanted)
               date && {
                 type: "div",
                 props: {
                   style: {
                     fontSize: "16px",
-                    fontFamily: "PP Radio Grotesk",
+                    fontFamily: "Inter",
                     fontWeight: 700,
                     transform: "skewX(-8deg)",
                     color: "rgba(62, 52, 40, 0.7)",
@@ -131,7 +152,7 @@ function createTemplate(title, date, imageData) {
                 props: {
                   style: {
                     fontSize: title.length > 60 ? "42px" : title.length > 30 ? "52px" : "64px",
-                    fontFamily: "PP Radio Grotesk",
+                    fontFamily: "Inter",
                     fontWeight: 400,
                     lineHeight: 1.05,
                     letterSpacing: "-0.025em",
@@ -196,21 +217,21 @@ async function generateOgImage(post, outputDir, siteName, gamesData = []) {
     }
   }
 
-  const { radioGroteskRegular, radioGroteskBold } = await loadFonts();
+  const { regular, bold } = await loadFonts();
 
   const svg = await satori(createTemplate(title, date, imageData), {
     width: 1200,
     height: 630,
     fonts: [
       {
-        name: "PP Radio Grotesk",
-        data: radioGroteskRegular,
+        name: "Inter",
+        data: regular,
         weight: 400,
         style: "normal",
       },
       {
-        name: "PP Radio Grotesk",
-        data: radioGroteskBold,
+        name: "Inter",
+        data: bold,
         weight: 700,
         style: "normal",
       },
