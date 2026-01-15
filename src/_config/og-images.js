@@ -70,12 +70,16 @@ async function loadFonts() {
     throw new Error(`Font fetch failed: regular=${regularRes.status}, bold=${boldRes.status}`);
   }
 
-  const [regular, bold] = await Promise.all([
+  const [regularArrayBuffer, boldArrayBuffer] = await Promise.all([
     regularRes.arrayBuffer(),
     boldRes.arrayBuffer(),
   ]);
 
-  console.log(`[og-images] Fonts loaded: regular=${regular.byteLength} bytes, bold=${bold.byteLength} bytes`);
+  // Convert to Node.js Buffer for reliable cross-platform handling
+  const regular = Buffer.from(regularArrayBuffer);
+  const bold = Buffer.from(boldArrayBuffer);
+
+  console.log(`[og-images] Fonts loaded: regular=${regular.length} bytes, bold=${bold.length} bytes`);
   return { regular, bold };
 }
 
