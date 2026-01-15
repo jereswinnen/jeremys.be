@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 // Cache font loading
-let fontData = null;
+let fonts = null;
 
 // Extract first content image from HTML (skips small icons)
 function extractFirstImage(content) {
@@ -58,20 +58,36 @@ async function loadImageAsBase64(imagePath) {
   }
 }
 
-async function loadFont() {
-  if (fontData) return fontData;
+async function loadFonts() {
+  if (fonts) return fonts;
 
-  // Fetch Inter font from Google Fonts (widely supported, clean look)
-  const response = await fetch(
-    "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff"
+  // Load PP Radio Grotesk Regular from local TTF file
+  const radioGroteskPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
+  const radioGroteskData = await readFile(radioGroteskPath);
+
+  // Fetch Commissioner from Google Fonts
+  const commissionerRes = await fetch(
+    "https://fonts.gstatic.com/s/commissioner/v24/tDaH2o2WnlgI0FNDgduEk4jAhwgumbU1SVfU5BD8OuRL8OstC6KOhgvBYWSFJ-Mgdrgiju6fF8meZm0rk4eF-ZugTPFdGPc.ttf"
   );
-  fontData = await response.arrayBuffer();
-  return fontData;
+  const commissionerData = await commissionerRes.arrayBuffer();
+
+  fonts = { radioGrotesk: radioGroteskData, commissioner: commissionerData };
+  return fonts;
 }
 
-// OG Image template - customize this for your design
-function createTemplate(title, siteName, type, imageData) {
-  // Layout with image on the right if present
+// Format date as "January 15, 2025"
+function formatDate(date) {
+  if (!date) return null;
+  const d = new Date(date);
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+// OG Image template
+function createTemplate(title, date, imageData) {
   const hasImage = !!imageData;
 
   return {
@@ -81,68 +97,51 @@ function createTemplate(title, siteName, type, imageData) {
         display: "flex",
         width: "1200px",
         height: "630px",
-        backgroundColor: "#0a0a0a",
-        color: "#fafafa",
+        backgroundColor: "#D7D3CE",
+        color: "#3E3428",
       },
       children: [
-        // Left side: Content
+        // Left side: Content (date + title, vertically centered)
         {
           type: "div",
           props: {
             style: {
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
+              justifyContent: "center",
               padding: "60px",
-              flex: hasImage ? "1" : "1",
               width: hasImage ? "700px" : "100%",
+              gap: "16px",
             },
             children: [
-              // Top: Type label
-              type && {
+              // Date (Commissioner Medium, 70% opacity, slanted)
+              date && {
                 type: "div",
                 props: {
                   style: {
-                    fontSize: "24px",
-                    color: "#737373",
-                    textTransform: "capitalize",
+                    fontSize: "16px",
+                    fontFamily: "Commissioner",
+                    fontWeight: 500,
+                    fontStyle: "italic",
+                    transform: "skewX(-8deg)",
+                    color: "rgba(62, 52, 40, 0.7)",
                   },
-                  children: type,
+                  children: date,
                 },
               },
-              // Middle: Title
+              // Title
               {
-                type: "div",
+                type: "h1",
                 props: {
                   style: {
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    flex: 1,
+                    fontSize: title.length > 60 ? "42px" : title.length > 30 ? "52px" : "64px",
+                    fontFamily: "PP Radio Grotesk",
+                    fontWeight: 400,
+                    lineHeight: 1.05,
+                    letterSpacing: "-0.025em",
+                    margin: 0,
                   },
-                  children: {
-                    type: "h1",
-                    props: {
-                      style: {
-                        fontSize: title.length > 60 ? "42px" : title.length > 30 ? "52px" : "64px",
-                        fontWeight: 600,
-                        lineHeight: 1.2,
-                        margin: 0,
-                      },
-                      children: title,
-                    },
-                  },
-                },
-              },
-              // Bottom: Site name
-              {
-                type: "div",
-                props: {
-                  style: {
-                    fontSize: "28px",
-                    color: "#a3a3a3",
-                  },
-                  children: siteName,
+                  children: title,
                 },
               },
             ].filter(Boolean),
@@ -176,16 +175,20 @@ function createTemplate(title, siteName, type, imageData) {
   };
 }
 
-async function generateOgImage(post, outputDir, siteName) {
-  const title = post.data.title || "Untitled";
-  // Use URL-based slug for uniqueness (e.g., /gamelog/zelda-totk/2025-12-21/ -> gamelog-zelda-totk-2025-12-21)
-  const slug = post.url?.replace(/^\/|\/$/g, "").replace(/\//g, "-") || post.fileSlug || "post";
+async function generateOgImage(post, outputDir, siteName, gamesData = []) {
+  // Get title, falling back to game title for gamelog posts without a title
+  let title = post.data.title;
+  if (!title && post.data.game) {
+    const game = gamesData.find((g) => g.slug === post.data.game);
+    if (game) {
+      title = game.title;
+    }
+  }
+  title = title || "Untitled";
 
-  // Determine post type from tags
-  let type = null;
-  if (post.data.tags?.includes("articles")) type = "article";
-  else if (post.data.tags?.includes("notes")) type = "note";
-  else if (post.data.tags?.includes("gamelog")) type = "gamelog";
+  const date = formatDate(post.date || post.data.date);
+  // Use URL-based slug for uniqueness
+  const slug = post.url?.replace(/^\/|\/$/g, "").replace(/\//g, "-") || post.fileSlug || "post";
 
   // Try to extract and load the first image from post content
   let imageData = null;
@@ -197,22 +200,22 @@ async function generateOgImage(post, outputDir, siteName) {
     }
   }
 
-  const font = await loadFont();
+  const { radioGrotesk, commissioner } = await loadFonts();
 
-  const svg = await satori(createTemplate(title, siteName, type, imageData), {
+  const svg = await satori(createTemplate(title, date, imageData), {
     width: 1200,
     height: 630,
     fonts: [
       {
-        name: "Inter",
-        data: font,
+        name: "PP Radio Grotesk",
+        data: radioGrotesk,
         weight: 400,
         style: "normal",
       },
       {
-        name: "Inter",
-        data: font,
-        weight: 600,
+        name: "Commissioner",
+        data: commissioner,
+        weight: 500,
         style: "normal",
       },
     ],
@@ -229,7 +232,7 @@ async function generateOgImage(post, outputDir, siteName) {
   return `/og/${slug}.png`;
 }
 
-export async function generateAllOgImages(collections, outputDir, siteName) {
+export async function generateAllOgImages(collections, outputDir, siteName, gamesData = []) {
   const ogDir = join(outputDir, "og");
 
   // Create og directory if it doesn't exist
@@ -243,7 +246,7 @@ export async function generateAllOgImages(collections, outputDir, siteName) {
   const startTime = Date.now();
 
   for (const post of posts) {
-    await generateOgImage(post, ogDir, siteName);
+    await generateOgImage(post, ogDir, siteName, gamesData);
   }
 
   const elapsed = Date.now() - startTime;

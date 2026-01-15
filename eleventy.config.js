@@ -1,4 +1,4 @@
-import { cpSync, existsSync } from "node:fs";
+import { cpSync, existsSync, readFileSync } from "node:fs";
 import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import markdownItAttrs from "markdown-it-attrs";
@@ -8,6 +8,9 @@ import pluginRss from "@11ty/eleventy-plugin-rss";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import shortcodes from "./src/_config/shortcodes/index.js";
 import { generateAllOgImages } from "./src/_config/og-images.js";
+
+// Load games data for OG image generation
+const gamesData = JSON.parse(readFileSync("./src/_data/games.json", "utf-8"));
 
 export default function (eleventyConfig) {
   // Markdown config
@@ -67,7 +70,7 @@ export default function (eleventyConfig) {
 
   // Generate OG images after build
   eleventyConfig.on("eleventy.after", async () => {
-    await generateAllOgImages({ blog: blogCollection }, "_site", "Jeremy Swinnen");
+    await generateAllOgImages({ blog: blogCollection }, "_site", "Jeremy Swinnen", gamesData);
   });
 
   // Passthrough copy
