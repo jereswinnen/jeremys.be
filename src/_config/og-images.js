@@ -65,11 +65,9 @@ async function loadFonts() {
   const radioGroteskPath = join(process.cwd(), "src/assets/fonts/PPRadioGroteskRegular.ttf");
   const radioGroteskData = await readFile(radioGroteskPath);
 
-  // Fetch Commissioner from Google Fonts
-  const commissionerRes = await fetch(
-    "https://fonts.gstatic.com/s/commissioner/v24/tDaH2o2WnlgI0FNDgduEk4jAhwgumbU1SVfU5BD8OuRL8OstC6KOhgvBYWSFJ-Mgdrgiju6fF8meZm0rk4eF-ZugTPFdGPc.ttf"
-  );
-  const commissionerData = await commissionerRes.arrayBuffer();
+  // Load Commissioner from local woff2 file
+  const commissionerPath = join(process.cwd(), "src/assets/fonts/Commissioner.woff2");
+  const commissionerData = await readFile(commissionerPath);
 
   fonts = { radioGrotesk: radioGroteskData, commissioner: commissionerData };
   return fonts;
