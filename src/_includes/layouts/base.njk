@@ -8,12 +8,21 @@
     <meta name="description" content="{{ description or site.description }}" />
 
     {# Open Graph #}
-    {% set isBlogPost = tags and ('articles' in tags or 'notes' in tags or 'gamelog' in tags) %}
-    {% if isBlogPost %}
-      {% set ogSlug = page.url | ogSlug %}
-      {% set ogImage = site.url + "/og/" + ogSlug + ".png" %}
-    {% else %}
-      {% set ogImage = site.url + "/assets/images/og-default.jpg" %}
+    {% set ogImage = image %}
+    {% if not ogImage %}
+      {% set ogImage = content | firstImage %}
+    {% endif %}
+    {% if not ogImage and game %}
+      {% set gameData = game | getGame(games) %}
+      {% if gameData and gameData.cover %}
+        {% set ogImage = "/assets/images/games/" + gameData.cover %}
+      {% endif %}
+    {% endif %}
+    {% if not ogImage %}
+      {% set ogImage = "/assets/images/og-default.jpg" %}
+    {% endif %}
+    {% if ogImage and not ogImage.startsWith('http') %}
+      {% set ogImage = site.url + ogImage %}
     {% endif %}
 
     <meta property="og:title" content="{{ title or site.title }}" />

@@ -1,4 +1,4 @@
-import { cpSync, existsSync, readFileSync } from "node:fs";
+import { cpSync, existsSync } from "node:fs";
 import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import markdownItAttrs from "markdown-it-attrs";
@@ -7,10 +7,6 @@ import markdownItMark from "markdown-it-mark";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import shortcodes from "./src/_config/shortcodes/index.js";
-import { generateAllOgImages } from "./src/_config/og-images.js";
-
-// Load games data for OG image generation
-const gamesData = JSON.parse(readFileSync("./src/_data/games.json", "utf-8"));
 
 export default function (eleventyConfig) {
   // Markdown config
@@ -55,22 +51,6 @@ export default function (eleventyConfig) {
     if (existsSync(".cache/eleventy-img/")) {
       cpSync(".cache/eleventy-img/", "_site/img/", { recursive: true });
     }
-  });
-
-  // Store collections for OG image generation
-  let blogCollection = [];
-  eleventyConfig.addCollection("blogWithOg", function (collectionApi) {
-    blogCollection = [
-      ...collectionApi.getFilteredByTag("articles"),
-      ...collectionApi.getFilteredByTag("notes"),
-      ...collectionApi.getFilteredByTag("gamelog")
-    ].sort((a, b) => b.date - a.date);
-    return blogCollection;
-  });
-
-  // Generate OG images after build
-  eleventyConfig.on("eleventy.after", async () => {
-    await generateAllOgImages({ blog: blogCollection }, "_site", "Jeremy Swinnen", gamesData);
   });
 
   // Passthrough copy
@@ -161,25 +141,11 @@ export default function (eleventyConfig) {
     return tags.filter(tag => !excludeList.includes(tag));
   });
 
-  // Convert URL to OG image slug (e.g., /gamelog/zelda-totk/2025-12-21/ -> gamelog-zelda-totk-2025-12-21)
-  eleventyConfig.addFilter("ogSlug", (url) => {
-    if (!url) return null;
-    return url.replace(/^\/|\/$/g, "").replace(/\//g, "-");
-  });
-
-  // Extract first content image URL from HTML (skips small icons)
+  // Extract first image URL from markdown content
   eleventyConfig.addFilter("firstImage", (content) => {
     if (!content) return null;
-    // Match all img tags, then filter out small icons (size-* class)
-    const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/g;
-    let match;
-    while ((match = imgRegex.exec(content)) !== null) {
-      // Skip images with size-* classes (typically small icons)
-      if (!match[0].includes('class="size-')) {
-        return match[1];
-      }
-    }
-    return null;
+    const match = content.match(/!\[.*?\]\((.*?)\)/);
+    return match ? match[1] : null;
   });
 
   // Format time, returns empty string if midnight (no time set)
